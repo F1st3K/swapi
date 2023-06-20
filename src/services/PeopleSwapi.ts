@@ -10,11 +10,18 @@ export interface Person {
 }
 
 export const PERSON_HEADERS = ['Name', 'Height', 'Mass', 'Hair color', 'Skin color', 'Eye color', 'Birth year', 'Gender'];
-const People = () => {
+export const InfoPeoples = () => {
     return fetch('https://swapi.dev/api/people/')
         .then(response => response.json())
         .catch(error => console.error(error));
 }
+
+export const InfoPeopleById = (id: number) => {
+    return fetch('https://swapi.dev/api/people/' + id)
+        .then(response => response.json())
+        .catch(error => console.error(error));
+}
+
 export const toTableFormat = (data: Person[]):string[][] => {
     let table: string[][] = [];
     table.push(PERSON_HEADERS);
@@ -33,4 +40,4 @@ export const toTableFormat = (data: Person[]):string[][] => {
     return table;
 }
 
-export default People;
+export default InfoPeoples;

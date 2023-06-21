@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface PropsData{
+export interface PropsData{
     data: string[][];
 }
 
@@ -9,17 +9,20 @@ function Table({data}:PropsData) {
     return (
         <div className="Table">
             <table>
+                <thead></thead>
+                <tbody>
                 {
                     data.map((row, i) => {
                         return (
-                            <tr>
+                            <tr key={i}>
                                 {
-                                    row.map((item, i) => {
-                                        return (<td>{item}</td>)})
+                                    row.map((item, j) => {
+                                        return (<td key={j}>{item}</td>)})
                                 }
                             </tr>
                         )})
                 }
+                </tbody>
             </table>
         </div>
     );

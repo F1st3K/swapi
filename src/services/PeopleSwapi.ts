@@ -14,16 +14,18 @@ export interface Person {
 export const PERSON_HEADERS = ['Name', 'Height', 'Mass', 'Hair color', 'Skin color', 'Eye color', 'Birth year', 'Gender'];
 export const URL: string = 'https://swapi.dev/api/people/';
 
-export const InfoPeoples = ((): { data: Person[] | null; loading: boolean } => {
+export const InfoPeoples = ((page: number): { data: Person[] | null; loading: boolean; countPage: number } => {
     const [data, setData] = useState<Person[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [countPage, setCountPage] = useState<number>(0);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(URL);
+                const response = await fetch(URL+'?page='+page);
                 const json = await response.json();
                 setData(json.results);
+                setCountPage(json.count);
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -31,9 +33,9 @@ export const InfoPeoples = ((): { data: Person[] | null; loading: boolean } => {
         };
 
         fetchData();
-    }, []);
+    });
 
-    return { data, loading };
+    return { data, loading, countPage };
 });
 
 export const InfoPeopleById = (id: number) => {

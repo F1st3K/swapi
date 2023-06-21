@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from "../Button/Button";
 import Table from "../Table/Table";
 
 interface PropsData{
     data: string[][]
     countPage: number,
+    currentPage: number,
     prevHandler: () => void,
     nextHandler: () => void,
 }
 
-const PagingTable = ({data, countPage, prevHandler, nextHandler}:PropsData) => {
-    const [currentPage, setCurrentPage] = useState<number>(1)
+const PagingTable = ({data, countPage, currentPage, prevHandler, nextHandler}:PropsData) => {
 
     return (
         <div>
@@ -18,7 +18,7 @@ const PagingTable = ({data, countPage, prevHandler, nextHandler}:PropsData) => {
             {
                 currentPage > 1 ? (
                     <Button
-                        onClick={() => { setCurrentPage(currentPage - 1); prevHandler() }}
+                        onClick={() => {  prevHandler(); currentPage --; }}
                         text={(currentPage - 1).toString()}/>
                 ):(<></>)
             }
@@ -26,7 +26,7 @@ const PagingTable = ({data, countPage, prevHandler, nextHandler}:PropsData) => {
             {
                 currentPage < countPage ? (
                     <Button
-                        onClick={() => { setCurrentPage(currentPage + 1); nextHandler() }}
+                        onClick={() => {  nextHandler(); currentPage++; }}
                         text={(currentPage + 1).toString()}/>
                 ):(<></>)
             }

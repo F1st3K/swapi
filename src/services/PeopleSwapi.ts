@@ -31,9 +31,9 @@ export const InfoPeoples = ((page: number): { data: Person[] | null; loading: bo
                 console.error(error);
             }
         };
-
+        setLoading(true);
         fetchData();
-    });
+    }, [page]);
 
     return { data, loading, countPage };
 });

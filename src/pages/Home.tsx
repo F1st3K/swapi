@@ -7,7 +7,7 @@ let dataTable: string[][] = [];
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const { data, loading, countPage } = InfoPeople(currentPage);
+    let { data, loading, countPage } = InfoPeople(currentPage);
     const persons: Person[] = data ? data : [];
     dataTable = toTableFormat(persons);
 
@@ -19,9 +19,9 @@ const Home = () => {
     }
     return (
         <div>
-            <PagingTable data={dataTable} countPage={countPage/10}
-                         nextHandler={()=>{setCurrentPage(currentPage+1)}}
-                         prevHandler={()=>{setCurrentPage(currentPage-1)}}/>
+            <PagingTable data={dataTable} countPage={countPage/10} currentPage={currentPage}
+                         nextHandler={()=>{ setCurrentPage(currentPage + 1);}}
+                         prevHandler={()=>{ setCurrentPage(currentPage - 1);}}/>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import { ReactElement, useState} from 'react';
-import { useLocation, HistoryRouterProps} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import Button from '../Button/Button';
 
 export interface Tab {
@@ -15,12 +15,13 @@ interface TabsProps {
 const RouteTabs = ({ tabs }: TabsProps) => {
     const [activeTab, setActiveTab] = useState(tabs[0].id);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const handleTabClick = (tabId: number) => {
         setActiveTab(tabId);
         const tabUrl = `/${tabId}`;
         if (location.pathname !== tabUrl) {
-            window.history.pushState({}, tabUrl);
+            navigate(tabUrl);
         }
     };
 
@@ -39,18 +40,9 @@ const RouteTabs = ({ tabs }: TabsProps) => {
                     </li>
                 ))}
             </ul>
-            <div>
-                {tabs.map((tab) => (
-                    <div
-                        key={tab.id}
-                        className={`tab-pane fade ${
-                            tab.id === activeTab ? "show active" : ""
-                        }`}
-                    >
-                        {tab.content}
-                    </div>
-                ))}
-            </div>
+                <div key={tabs[activeTabIndex].id}>
+                    {tabs[activeTabIndex].content}
+                </div>
         </div>
     );
 };

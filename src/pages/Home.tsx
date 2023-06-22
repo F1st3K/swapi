@@ -3,6 +3,7 @@ import './../App.css';
 import PagingTable from "../components/PagingTable/PagingTable";
 import InfoPeople, {toTableFormat} from "../services/PeopleSwapi";
 import RouteTabs, {Tab} from "../components/RouteTabs/RouteTabs";
+import {redirect, Route, Routes} from "react-router-dom";
 
 let dataTable: string[][] = [];
 
@@ -11,11 +12,11 @@ const Home = () => {
     let { data, loading, countPage } = InfoPeople(currentPage);
     const persons = data ? data : [];
     dataTable = toTableFormat(persons);
-    const tab: Tab = {
+    const tabs: Tab[] = [{
         id: 1,
         label: 'd',
         content: <div></div>
-    }
+    }];
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -28,7 +29,7 @@ const Home = () => {
                          nextHandler={()=>{ setCurrentPage(currentPage + 1);}}
                          prevHandler={()=>{ setCurrentPage(currentPage - 1);}}
             />
-            <RouteTabs tabs={[tab]}/>
+            <RouteTabs tabs={tabs}/>
         </div>
     );
 }

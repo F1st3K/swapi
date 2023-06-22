@@ -1,50 +1,44 @@
-import { ReactElement, useState} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
-import Button from '../Button/Button';
+import React, { useState } from "react";
+import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 
 export interface Tab {
-    id: number,
-    label: string,
-    content: ReactElement,
+    title: string;
+    path: string;
+    component: React.FC;
 }
 
-interface TabsProps {
-    tabs: Tab[],
+interface Props {
+    tabs: Tab[];
 }
 
-const RouteTabs = ({ tabs }: TabsProps) => {
-    const [activeTab, setActiveTab] = useState(tabs[0].id);
+const Tabs: React.FC<Props> = ({ tabs }) => {
     const location = useLocation();
-    const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState<string>(location.pathname);
 
-    const handleTabClick = (tabId: number) => {
-        setActiveTab(tabId);
-        const tabUrl = `/${tabId}`;
-        if (location.pathname !== tabUrl) {
-            navigate(tabUrl);
-        }
+    const handleTabClick = (path: string) => {
+        setActiveTab(path);
     };
-
-    const activeTabIndex = tabs.findIndex((tab) => tab.id === activeTab);
 
     return (
         <div>
-            <ul>
+            <div>
                 {tabs.map((tab) => (
-                    <li key={tab.id}>
-                        <Button
-                            text={tab.label}
-                            onClick={() => handleTabClick(tab.id)}
-                        />
-
-                    </li>
+                    <NavLink
+                        key={tab.path}
+                        to={tab.path}
+                        onClick={() => handleTabClick(tab.path)}
+                    >
+                        {tab.title}
+                    </NavLink>
                 ))}
-            </ul>
-                <div key={tabs[activeTabIndex].id}>
-                    {tabs[activeTabIndex].content}
-                </div>
+            </div>
+            <Routes>
+                {tabs.map((tab) => (
+                    <Route key={tab.path} path={tab.path} Component={tab.component} />
+                ))}
+            </Routes>
         </div>
     );
 };
 
-export default RouteTabs;
+export default Tabs;

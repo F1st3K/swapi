@@ -3,7 +3,6 @@ import './../App.css';
 import PagingTable from "../components/PagingTable/PagingTable";
 import InfoPeople, {toTableFormat} from "../services/PeopleSwapi";
 import RouteTabs, {Tab} from "../components/RouteTabs/RouteTabs";
-import {redirect, Route, Routes} from "react-router-dom";
 
 let dataTable: string[][] = [];
 
@@ -13,9 +12,9 @@ const Home = () => {
     const persons = data ? data : [];
     dataTable = toTableFormat(persons);
     const tabs: Tab[] = [{
-        id: 1,
-        label: 'd',
-        content: <div></div>
+        title: 'd',
+        path: '/home/d',
+        component: () => {return <div></div>}
     }];
     if (loading) {
         return <div>Loading...</div>;

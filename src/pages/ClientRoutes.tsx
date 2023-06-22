@@ -5,7 +5,7 @@ import Home from "./Home";
 function ClientRoutes() {
     return (
         <Routes>
-            <Route path='/' Component={Home}/>
+            <Route path='/home' Component={Home}/>
         </Routes>
     );
 }

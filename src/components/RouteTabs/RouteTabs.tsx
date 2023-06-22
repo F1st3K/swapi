@@ -1,8 +1,8 @@
 import { ReactElement, useState} from 'react';
-import { useLocation, HistoryRouterProps } from 'react-router-dom';
+import { useLocation, HistoryRouterProps} from 'react-router-dom';
 import Button from '../Button/Button';
 
-interface Tab {
+export interface Tab {
     id: number,
     label: string,
     content: ReactElement,
@@ -12,7 +12,7 @@ interface TabsProps {
     tabs: Tab[],
 }
 
-const RouteTabs = ({ tabs }: TabsProps, {history}: HistoryRouterProps ) => {
+const RouteTabs = ({ tabs }: TabsProps) => {
     const [activeTab, setActiveTab] = useState(tabs[0].id);
     const location = useLocation();
 
@@ -20,7 +20,7 @@ const RouteTabs = ({ tabs }: TabsProps, {history}: HistoryRouterProps ) => {
         setActiveTab(tabId);
         const tabUrl = `/${tabId}`;
         if (location.pathname !== tabUrl) {
-            history.push(tabUrl);
+            window.history.pushState({}, tabUrl);
         }
     };
 

@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import './../App.css';
 import PagingTable from "../components/PagingTable/PagingTable";
-import InfoPeople, {Person, toTableFormat} from "../services/PeopleSwapi";
+import InfoPeople, {toTableFormat} from "../services/PeopleSwapi";
 
 let dataTable: string[][] = [];
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     let { data, loading, countPage } = InfoPeople(currentPage);
-    const persons: Person[] = data ? data : [];
+    const persons = data ? data : [];
     dataTable = toTableFormat(persons);
 
     if (loading) {

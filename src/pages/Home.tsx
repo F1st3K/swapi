@@ -1,16 +1,22 @@
 import React, {useState} from 'react';
 import './../App.css';
 import PagingTable from "../components/PagingTable/PagingTable";
-import InfoPeople, {Person, toTableFormat} from "../services/PeopleSwapi";
+import InfoPeople, {toTableFormat} from "../services/PeopleSwapi";
+import RouteTabs, {Tab} from "../components/RouteTabs/RouteTabs";
+import {redirect, Route, Routes} from "react-router-dom";
 
 let dataTable: string[][] = [];
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     let { data, loading, countPage } = InfoPeople(currentPage);
-    const persons: Person[] = data ? data : [];
+    const persons = data ? data : [];
     dataTable = toTableFormat(persons);
-
+    const tabs: Tab[] = [{
+        id: 1,
+        label: 'd',
+        content: <div></div>
+    }];
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -21,7 +27,9 @@ const Home = () => {
         <div>
             <PagingTable data={dataTable} countPage={countPage/10} currentPage={currentPage}
                          nextHandler={()=>{ setCurrentPage(currentPage + 1);}}
-                         prevHandler={()=>{ setCurrentPage(currentPage - 1);}}/>
+                         prevHandler={()=>{ setCurrentPage(currentPage - 1);}}
+            />
+            <RouteTabs tabs={tabs}/>
         </div>
     );
 }

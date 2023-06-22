@@ -6,7 +6,6 @@ function ClientRoutes() {
     return (
         <Routes>
             <Route path='/' Component={Home}/>
-            <Route path='*' Component={Home}/>
         </Routes>
     );
 }

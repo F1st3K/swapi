@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './Table.module.css'
 
 export interface PropsData{
     data: string[][];
@@ -7,7 +8,7 @@ export interface PropsData{
 
 function Table({data}:PropsData) {
     return (
-        <div className="Table">
+        <div className={s.Table}>
             <table>
                 <thead>
                 {

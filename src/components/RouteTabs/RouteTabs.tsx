@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './RouteTabs.css'
+import s from './RouteTabs.module.css'
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 
 export interface Tab {
@@ -25,7 +25,7 @@ const Tabs: React.FC<Props> = ({ tabs }) => {
             <div>
                 {tabs.map((tab) => (
                     <NavLink
-                        className={activeTab === tab.path ? 'active_tab' : 'tab'}
+                        className={activeTab === tab.path ? s.active_tab : s.tab}
                         key={tab.path}
                         to={tab.path}
                         onClick={() => handleTabClick(tab.path)}

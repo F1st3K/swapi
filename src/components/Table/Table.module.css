@@ -1,0 +1,13 @@
+.Table thead {
+    background-color: gainsboro;
+
+}
+.Table td {
+    border: 2px solid #666666;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.Table table {
+    border-collapse: collapse;
+}

@@ -40,12 +40,6 @@ export const InfoPlanets = ((page: number): { data: Planet[] | null; loading: bo
     return { data, loading, countPage };
 });
 
-export const InfoPlanetById = (id: number) => {
-    return fetch(URL + id)
-        .then(response => response.json())
-        .catch(error => console.error(error));
-}
-
 export const toTableFormat = (data: Planet[]):string[][] => {
     let table: string[][] = [];
     table.push(PERSON_HEADERS);

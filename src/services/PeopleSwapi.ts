@@ -38,12 +38,6 @@ export const InfoPeoples = ((page: number): { data: Person[] | null; loading: bo
     return { data, loading, countPage };
 });
 
-export const InfoPeopleById = (id: number) => {
-    return fetch('https://swapi.dev/api/people/' + id)
-        .then(response => response.json())
-        .catch(error => console.error(error));
-}
-
 export const toTableFormat = (data: Person[]):string[][] => {
     let table: string[][] = [];
     table.push(PERSON_HEADERS);
@@ -62,5 +56,7 @@ export const toTableFormat = (data: Person[]):string[][] => {
     });
     return table;
 }
+
+
 
 export default InfoPeoples;

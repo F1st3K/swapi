@@ -24,6 +24,7 @@ const Tabs: React.FC<Props> = ({ tabs }) => {
             <div>
                 {tabs.map((tab) => (
                     <NavLink
+                        className={activeTab === tab.path ? 'active_tab' : 'tab'}
                         key={tab.path}
                         to={tab.path}
                         onClick={() => handleTabClick(tab.path)}

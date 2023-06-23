@@ -1,0 +1,14 @@
+.tab {
+    color: dimgray;
+    text-decoration-color: darkgray;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    background-color: darkgray;
+}
+
+.active_tab {
+    color: black;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    background-color: darkgray;
+}

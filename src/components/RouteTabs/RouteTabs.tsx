@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './RouteTabs.css'
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 
 export interface Tab {

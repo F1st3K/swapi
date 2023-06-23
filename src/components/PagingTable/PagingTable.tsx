@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from "../Button/Button";
 import Table from "../Table/Table";
+import s from "./PagingTable.module.css"
 
 interface PropsData{
     data: string[][]
@@ -13,8 +14,9 @@ interface PropsData{
 const PagingTable = ({data, countPage, currentPage, prevHandler, nextHandler}:PropsData) => {
 
     return (
-        <div>
+        <div className={s.pagingTable}>
             <Table data={data}/>
+            <div className={s.currentPage}></div>
             {
                 currentPage > 1 ? (
                     <Button
@@ -22,7 +24,7 @@ const PagingTable = ({data, countPage, currentPage, prevHandler, nextHandler}:Pr
                         text={(currentPage - 1).toString()}/>
                 ):(<></>)
             }
-            <p>{currentPage}</p>
+            <p className={s.currentPage}>{currentPage}</p>
             {
                 currentPage < countPage ? (
                     <Button

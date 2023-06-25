@@ -7,17 +7,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import StringTable from "../../Types/StringTable";
+import DataTable  from "../../Types/DataTable";
 
 type DataTableProps = {
-    data: StringTable;
+    data: DataTable;
     countRows: number;
     varsRowsPerPage: number[];
     onPageChanged?: (newPage: number) => void;
     onRowsPerPageChanged?: (newRowsPerPage: number) => void;
 }
 
-export default function DataTable({data, countRows, varsRowsPerPage, onPageChanged, onRowsPerPageChanged}: DataTableProps) {
+export default function MuiTable({data, countRows, varsRowsPerPage, onPageChanged, onRowsPerPageChanged}: DataTableProps) {
     const [table, setTable] = React.useState(data);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(varsRowsPerPage[0]);
@@ -40,19 +40,19 @@ export default function DataTable({data, countRows, varsRowsPerPage, onPageChang
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {table.Columns.map((column, i) => (
+                            {table.columns.map((column, i) => (
                                 <TableCell key={i}>
-                                    {column.name}
+                                    {column.title}
                                 </TableCell>
                             ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {table.Rows
+                        {table.rows
                             .map((row, i) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={i}>
-                                        {table.Columns.map((column, j) => {
+                                        {table.columns.map((column, j) => {
                                             const value = row[j];
                                             return (
                                                 <TableCell key={i}>

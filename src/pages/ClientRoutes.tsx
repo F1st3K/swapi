@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import Home from "./Home";
-import {Tab} from "../components/RouteTabs/RouteTabs";
+import RouteTabs, {Tab} from "../components/RouteTabs/RouteTabs";
 import TablePeople from "./TablePeople";
 import TablePlanets from "./TablePlanets";
 
@@ -20,7 +20,7 @@ function ClientRoutes() {
             <Routes>
                 <Route path='/home/' Component={Home}/>
             </Routes>
-
+            <RouteTabs tabs={tabs}/>
         </>
     );
 }

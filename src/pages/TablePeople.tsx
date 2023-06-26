@@ -1,32 +1,34 @@
 import React, {useState} from "react";
-import InfoPeople, {toTableFormat} from "../services/PeopleSwapi";
 import MuiTable from "../components/MuiTable/MuiTable";
 import MuiPagination from "../components/MuiPagination/MuiPugination";
-import DataTable, {DataColumn} from "../Types/DataTable";
+import {getPeople} from "../services/Swapi";
+import DataTable from "../Types/DataTable";
 
 
 const TablePeople = () => {
     const [currentPage, setCurrentPage] = useState(0);
-    const { data, loading, countRows } = InfoPeople(currentPage);
+    const { data, isLoading } = getPeople(currentPage);
 
-    const dataTable = toTableFormat(data ? data : []);
-    const table = new DataTable(dataTable[0].map((column) => {
-        return {title: column, type: typeof column} as DataColumn} ));
-    dataTable.slice(1).map((row) => { table.addRow(row)});
 
-    if (loading) {
+    if (isLoading || data === null) {
         return <div>Loading...</div>;
     }
-    if (!data) {
+
+    const table: DataTable = data.results;
+    alert(data.results + " " + table + " " + isLoading)
+
+    if (!table.rows.length) {
         return <div>No data available</div>;
     }
+
     return (
         <div>
-            <MuiTable table={table}/>
-            <MuiPagination countRows={countRows}
-                           currentPage={currentPage}
-                           varsRowsPerPage={[10]}
-                           onPageChanged={setCurrentPage}
+            <MuiTable table={table} />
+            <MuiPagination
+                countRows={table.rows.length}
+                currentPage={currentPage}
+                varsRowsPerPage={[10]}
+                onPageChanged={setCurrentPage}
             />
         </div>
     );

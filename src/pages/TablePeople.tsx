@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import InfoPeople, {toTableFormat} from "../services/PeopleSwapi";
 import MuiTable from "../components/MuiTable/MuiTable";
-import MuiPugination from "../components/MuiPagination/MuiPugination";
+import MuiPagination from "../components/MuiPagination/MuiPugination";
 import DataTable, {DataColumn} from "../Types/DataTable";
 
 
@@ -23,7 +23,7 @@ const TablePeople = () => {
     return (
         <div>
             <MuiTable table={table}/>
-            <MuiPugination countRows={countRows}
+            <MuiPagination countRows={countRows}
                            currentPage={currentPage}
                            varsRowsPerPage={[10]}
                            onPageChanged={setCurrentPage}

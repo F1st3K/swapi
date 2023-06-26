@@ -9,23 +9,23 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import DataTable  from "../../Types/DataTable";
 
-type DataTableProps = {
-    data: DataTable;
+type MuiTableProps = {
+    table: DataTable;
     countRows: number;
     varsRowsPerPage: number[];
-    onPageChanged?: (newPage: number) => void;
+    onPageChanged?: (newPage: number) => DataTable;
     onRowsPerPageChanged?: (newRowsPerPage: number) => void;
 }
 
-export default function MuiTable({data, countRows, varsRowsPerPage, onPageChanged, onRowsPerPageChanged}: DataTableProps) {
-    const [table, setTable] = React.useState(data);
+export default function MuiTable({countRows, varsRowsPerPage, onPageChanged, onRowsPerPageChanged}: MuiTableProps) {
     const [page, setPage] = React.useState(0);
+    const [table, setTable] = React.useState(new DataTable([]));
     const [rowsPerPage, setRowsPerPage] = React.useState(varsRowsPerPage[0]);
 
     const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
+        // setPage(newPage);
         alert(newPage);
-        if (onPageChanged) onPageChanged(newPage);
+        if (onPageChanged) setTable(onPageChanged(newPage));
     };
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {

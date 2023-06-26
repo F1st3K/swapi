@@ -5,7 +5,7 @@ type FetchState = {
     isLoading: boolean;
 }
 
-const GetFetchData = (( url: string ): FetchState => {
+const GetFetchData = ( url: string ): FetchState => {
     const [data, setData] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -29,6 +29,6 @@ const GetFetchData = (( url: string ): FetchState => {
     }, [url]);
 
     return { data, isLoading };
-});
+}
 
 export default GetFetchData;

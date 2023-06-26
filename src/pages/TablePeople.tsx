@@ -14,8 +14,12 @@ const TablePeople = () => {
         return <div>Loading...</div>;
     }
 
-    const table: DataTable = data.results;
-    alert(data.results + " " + table + " " + isLoading)
+    const table: DataTable = new DataTable(Object.keys(data.results[0]).map((key) => {return {title: key, type: typeof key}}));
+    data.results.map((row: Array<string>) => {
+            const d: string[] = Object.values(row).map((cell) => {return cell.toString()});
+            table.addRow(d);
+    });
+
 
     if (!table.rows.length) {
         return <div>No data available</div>;

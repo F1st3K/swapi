@@ -5,35 +5,14 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import DataTable  from "../../Types/DataTable";
 
 type MuiTableProps = {
     table: DataTable;
-    countRows: number;
-    varsRowsPerPage: number[];
-    onPageChanged?: (newPage: number) => DataTable;
-    onRowsPerPageChanged?: (newRowsPerPage: number) => void;
 }
 
-export default function MuiTable({countRows, varsRowsPerPage, onPageChanged, onRowsPerPageChanged}: MuiTableProps) {
-    const [page, setPage] = React.useState(0);
-    const [table, setTable] = React.useState(new DataTable([]));
-    const [rowsPerPage, setRowsPerPage] = React.useState(varsRowsPerPage[0]);
-
-    const handleChangePage = (event: unknown, newPage: number) => {
-        // setPage(newPage);
-        alert(newPage);
-        if (onPageChanged) setTable(onPageChanged(newPage));
-    };
-
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-        if (onRowsPerPageChanged) onRowsPerPageChanged(rowsPerPage);
-    };
-
+const MuiTable = ({table}: MuiTableProps) => {
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer>
@@ -66,15 +45,9 @@ export default function MuiTable({countRows, varsRowsPerPage, onPageChanged, onR
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={varsRowsPerPage}
-                component="div"
-                count={countRows}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+
         </Paper>
     );
 }
+
+export default MuiTable;

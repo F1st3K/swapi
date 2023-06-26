@@ -16,12 +16,12 @@ function ClientRoutes() {
         component: TablePlanets,
     }];
     return (
-        <div>
+        <>
             <Routes>
                 <Route path='/home/' Component={Home}/>
             </Routes>
             <RouteTabs tabs={tabs}/>
-        </div>
+        </>
     );
 }
 

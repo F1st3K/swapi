@@ -9,7 +9,7 @@ type FetchState<T> = {
 
 const useFetchData = <T extends JsonRecord<T>>(url: string ): FetchState<T> => {
     const [data, setData] = useState<T | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {

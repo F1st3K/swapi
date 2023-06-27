@@ -1,3 +1,5 @@
+import {JsonObject, JsonRecord} from "./JsonObject";
+
 export type DataType = string | number | boolean;
 
 export type DataColumn = {
@@ -11,10 +13,22 @@ export default class DataTable {
     public readonly columns: DataColumn[];
     public readonly rows: DataRow[];
 
+    public static getTableFrom<T extends JsonRecord<T>>(json: Array<JsonObject<T>>) {
+        if (json.length <= 0)
+            throw new Error("The json is empty");
+        const columns: DataColumn[] = Object.keys(json[0]).map((key, i): DataColumn => {
+            return {title: key, type: typeof Object.values(json[0]).at(i)}
+        });
+        const rows: DataRow[] = json.map((entry):DataRow => {
+            return Object.values(entry);
+        })
+        return new DataTable(columns, rows);
+    }
+
     constructor(columns: DataColumn[], rows?: DataRow[]) {
         this.columns = columns;
-        if (rows) this.rows = rows;
-        else this.rows = [];
+        this.rows = [];
+        if (rows) rows.map((row) => {this.addRow(row)})
     }
 
     addRow(values: DataRow) {

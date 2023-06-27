@@ -29,7 +29,7 @@ type Peoples = {
     count: number;
     next: string | null;
     previsions: string | null;
-    results: People[];
+    results: JsonPeople[];
 }
 type JsonPeoples = JsonObject<Peoples>;
 

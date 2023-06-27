@@ -12,10 +12,7 @@ const TablePeople = () => {
     if (isLoading || !data) {
         return <div>Loading...</div>;
     }
-
-    let table: DataTable;
-    table = new DataTable([]);
-
+    let table: DataTable = data.results ? DataTable.getTableFrom(data.results) : new DataTable([]);
 
     if (!table.rows.length) {
         return <div>No data available</div>;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {JsonObject, JsonRecord} from "../Types/JsonObject";
+import {JsonRecord} from "../Types/JsonObject";
 
 type FetchState<T> = {
     data: T | null;
@@ -22,8 +22,8 @@ const useFetchData = <T extends JsonRecord<T>>(url: string ): FetchState<T> => {
                 const result = await response.json();
                 setData(result);
                 setIsLoading(false);
-            } catch (e) {
-                console.error(e);
+            } catch (e: any) {
+                setError(e);
                 setIsLoading(false);
             }
         };

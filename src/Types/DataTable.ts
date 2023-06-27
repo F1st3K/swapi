@@ -1,6 +1,4 @@
 import {JsonObject, JsonRecord} from "./JsonObject";
-import {type} from "os";
-import {types} from "util";
 
 export type DataType = string | number | boolean;
 

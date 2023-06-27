@@ -34,7 +34,7 @@ const MuiTable = ({table}: MuiTableProps) => {
                                         {table.columns.map((column, j) => {
                                             const value = row[j];
                                             return (
-                                                <TableCell key={i}>
+                                                <TableCell key={j}>
                                                     {value}
                                                 </TableCell>
                                             );

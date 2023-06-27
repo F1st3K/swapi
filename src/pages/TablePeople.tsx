@@ -29,7 +29,7 @@ const TablePeople = () => {
         <div>
             <MuiTable table={table} />
             <MuiPagination
-                countRows={table.rows.length}
+                countRows={data.count}
                 currentPage={currentPage}
                 varsRowsPerPage={[10]}
                 onPageChanged={setCurrentPage}

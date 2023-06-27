@@ -1,5 +1,4 @@
-import GetFetchData from "../Hooks/GetFetchData";
-import DataTable from "../Types/DataTable";
+import UseFetchData from "../Hooks/UseFetchData";
 
 const API = "https://swapi.dev/api";
 const PEOPLE = "/people";
@@ -10,9 +9,9 @@ const getPage = (page: number) => {
 }
 
 export const getPeople = ( (page: number) => {
-    return GetFetchData(API+PEOPLE+getPage(page));
+    return UseFetchData(API+PEOPLE+getPage(page));
 });
 
-// export const getPlanets = (page: number): DataTable => {
-//     return GetFetchData(API+PLANETS+getPage(page)).data.results;
-// }
+export const getPlanets = (page: number) => {
+    return UseFetchData(API+PLANETS+getPage(page));
+}

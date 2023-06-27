@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import {JsonObject, JsonRecord} from "../Types/JsonObject";
 
-type FetchState<T extends JsonRecord<T>> = {
-    data: JsonObject<T> | null;
+type FetchState<T> = {
+    data: T | null;
     isLoading: boolean;
     error: Error | null;
 }
 
 const useFetchData = <T extends JsonRecord<T>>(url: string ): FetchState<T> => {
-    const [data, setData] = useState<JsonObject<T> | null>(null);
+    const [data, setData] = useState<T | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
 

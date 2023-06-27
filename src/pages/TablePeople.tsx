@@ -9,16 +9,12 @@ const TablePeople = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const { data, isLoading } = getPeople(currentPage);
 
-
-    if (isLoading || data === null) {
+    if (isLoading || !data) {
         return <div>Loading...</div>;
     }
 
-    const table: DataTable = new DataTable(Object.keys(data.results[0]).map((key) => {return {title: key, type: typeof key}}));
-    data.results.map((row: Array<string>) => {
-            const d: string[] = Object.values(row).map((cell) => {return cell.toString()});
-            table.addRow(d);
-    });
+    let table: DataTable;
+    table = new DataTable([]);
 
 
     if (!table.rows.length) {
@@ -29,7 +25,7 @@ const TablePeople = () => {
         <div>
             <MuiTable table={table} />
             <MuiPagination
-                countRows={data.count}
+                countRows={20}
                 currentPage={currentPage}
                 varsRowsPerPage={[10]}
                 onPageChanged={setCurrentPage}

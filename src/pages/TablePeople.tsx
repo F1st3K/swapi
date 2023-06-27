@@ -12,7 +12,7 @@ const TablePeople = () => {
     if (isLoading || !data) {
         return <div>Loading...</div>;
     }
-
+    data.results[0]
     let table: DataTable;
     table = new DataTable([]);
 

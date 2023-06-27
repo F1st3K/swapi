@@ -15,7 +15,7 @@ const Home = () => {
     }];
     return (
         <div>
-            <RouteTabs tabs={tabs}/>
+            {/*<RouteTabs tabs={tabs}/>*/}
         </div>
     );
 }

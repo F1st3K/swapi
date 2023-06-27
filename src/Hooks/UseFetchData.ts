@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import {JsonObject, JsonRecord} from "../Types/JsonObject";
 
-type FetchState = {
-    data: any;
+type FetchState<T extends JsonRecord<T>> = {
+    data: JsonObject<T> | null;
     isLoading: boolean;
+    error: Error | null;
 }
 
-const useFetchData = (url: string ): FetchState => {
-    const [data, setData] = useState<any>(null);
+const useFetchData = <T extends JsonRecord<T>>(url: string ): FetchState<T> => {
+    const [data, setData] = useState<JsonObject<T> | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,7 +31,7 @@ const useFetchData = (url: string ): FetchState => {
         fetchData();
     }, [url]);
 
-    return { data, isLoading };
+    return { data, isLoading, error };
 }
 
 export default useFetchData;

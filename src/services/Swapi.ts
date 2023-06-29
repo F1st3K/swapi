@@ -4,6 +4,9 @@ import {JsonArray, JsonObject} from "../Types/JsonObject";
 const API = "https://swapi.dev/api";
 const PEOPLE = "/people";
 const PLANETS = "/planets";
+const FIlMS = "/films";
+const SPECIES = "/species";
+const VEHICLES = "/vehicles";
 
 type Page<T> = {
     count: number;
@@ -66,7 +69,7 @@ type Films = {
 }
 
 type Species = {
-    name: number;
+    name: string;
     classification: string;
     designation: string;
     average_height: string;
@@ -77,6 +80,25 @@ type Species = {
     homeworld: string;
     language: string;
     people: JsonArray;
+    films: JsonArray;
+    created: string;
+    edited: string;
+    url: string;
+}
+
+type Vehicles = {
+    name: string;
+    model: string;
+    manufacturer: string;
+    cost_in_credits: string;
+    length: string;
+    max_atmosphering_speed: string;
+    crew: string;
+    passengers: string
+    cargo_capacity: string
+    consumables: string
+    vehicle_class: string;
+    pilots: JsonArray;
     films: JsonArray;
     created: string;
     edited: string;
@@ -96,9 +118,13 @@ export const getPlanets = (page: number) => {
 }
 
 export const getFilms = (page: number) => {
-    return UseFetchData<JsonObject<Page<Films>>>(API+PLANETS+getPage(page));
+    return UseFetchData<JsonObject<Page<Films>>>(API+FIlMS+getPage(page));
 }
 
 export const getSpecies = (page: number) => {
-    return UseFetchData<JsonObject<Page<Species>>>(API+PLANETS+getPage(page));
+    return UseFetchData<JsonObject<Page<Species>>>(API+SPECIES+getPage(page));
+}
+
+export const getVehicles = (page: number) => {
+    return UseFetchData<JsonObject<Page<Vehicles>>>(API+VEHICLES+getPage(page));
 }

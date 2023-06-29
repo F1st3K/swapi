@@ -7,6 +7,7 @@ const PLANETS = "/planets";
 const FIlMS = "/films";
 const SPECIES = "/species";
 const VEHICLES = "/vehicles";
+const STARSHIPS = "/starships";
 
 type Page<T> = {
     count: number;
@@ -105,6 +106,27 @@ type Vehicles = {
     url: string;
 }
 
+type Starships = {
+    name: string;
+    model: string;
+    manufacturer: string;
+    cost_in_credits: string;
+    length: string;
+    max_atmosphering_speed: string;
+    crew: string;
+    passengers: string;
+    cargo_capacity: string;
+    consumables: string;
+    hyperdrive_rating: string;
+    MGLT: string;
+    starship_class: string;
+    pilots: JsonArray;
+    films: JsonArray;
+    created: string;
+    edited: string;
+    url: string;
+}
+
 const getPage = (page: number) => {
     return "/?page=" + (page + 1);
 }
@@ -127,4 +149,8 @@ export const getSpecies = (page: number) => {
 
 export const getVehicles = (page: number) => {
     return UseFetchData<JsonObject<Page<Vehicles>>>(API+VEHICLES+getPage(page));
+}
+
+export const getStarships = (page: number) => {
+    return UseFetchData<JsonObject<Page<Starships>>>(API+STARSHIPS+getPage(page));
 }

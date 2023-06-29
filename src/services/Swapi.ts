@@ -1,5 +1,5 @@
 import UseFetchData from "../Hooks/UseFetchData";
-import {JsonArray, JsonObject} from "../Types/JsonObject";
+import {JsonArray, JsonObject, JsonRecord} from "../Types/JsonObject";
 
 const API = "https://swapi.dev/api";
 const PEOPLE = "/people";
@@ -132,25 +132,31 @@ const getPage = (page: number) => {
 }
 
 export const getPeople = ((page: number) => {
-    return UseFetchData<JsonObject<Page<People>>>(API+PEOPLE+getPage(page));
+    const fetch = UseFetchData<JsonObject<Page<People>>>(API+PEOPLE+getPage(page));
+    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
 });
 
 export const getPlanets = (page: number) => {
-    return UseFetchData<JsonObject<Page<Planets>>>(API+PLANETS+getPage(page));
+    const fetch = UseFetchData<JsonObject<Page<Planets>>>(API+PLANETS+getPage(page));
+    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
 }
 
 export const getFilms = (page: number) => {
-    return UseFetchData<JsonObject<Page<Films>>>(API+FIlMS+getPage(page));
+    const fetch = UseFetchData<JsonObject<Page<Films>>>(API+FIlMS+getPage(page));
+    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
 }
 
 export const getSpecies = (page: number) => {
-    return UseFetchData<JsonObject<Page<Species>>>(API+SPECIES+getPage(page));
+    const fetch = UseFetchData<JsonObject<Page<Species>>>(API+SPECIES+getPage(page));
+    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
 }
 
 export const getVehicles = (page: number) => {
-    return UseFetchData<JsonObject<Page<Vehicles>>>(API+VEHICLES+getPage(page));
+    const fetch = UseFetchData<JsonObject<Page<Vehicles>>>(API+VEHICLES+getPage(page));
+    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
 }
 
 export const getStarships = (page: number) => {
-    return UseFetchData<JsonObject<Page<Starships>>>(API+STARSHIPS+getPage(page));
+    const fetch = UseFetchData<JsonObject<Page<Starships>>>(API+STARSHIPS+getPage(page));
+    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
 }

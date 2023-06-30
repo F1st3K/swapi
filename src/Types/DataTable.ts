@@ -39,7 +39,7 @@ export default class DataTable {
             const colTitle = this.columns[i].title;
             const colType = this.columns[i].type;
             const val = values[i];
-            if (typeof val !== colType)
+            if (typeof val !== colType && val)
                 throw new Error(`The type of value ${val} does not match the type of column '${colTitle}'.`);
         }
         this.rows.push(values);

@@ -1,10 +1,12 @@
 import React from 'react';
 import {Box, Tab, Tabs} from "@mui/material";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const Home = (page: string) => {
     const navigate = useNavigate();
     const handleChange = (event: React.SyntheticEvent, newUrl: string) => {
+        if (page === newUrl)
+            navigate('/home');
         navigate(newUrl);
     };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import MuiDataView from "../components/MuiDataView/MuiDataView";
-import {getPeople} from "../services/Swapi";
+import {getPeople, getStarships} from "../services/Swapi";
 import Home from "./Home";
 
 
@@ -10,7 +10,7 @@ const TableStarships = () => {
         <>
             {tabs}
             <MuiDataView
-                getTableData={getPeople}
+                getTableData={getStarships}
                 countRows={83}
                 varsRowsPerPage={[10]}
             />

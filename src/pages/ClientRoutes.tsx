@@ -6,12 +6,13 @@ import TableFilms from "./TableFilms";
 import TableSpecies from "./TableSpecies";
 import TableStarships from "./TableStarships";
 import TableVehicles from "./TableVehicles";
+import Home from "./Home";
 
 function ClientRoutes() {
     return (
         <>
-            <Navigate to={"/home/people"}/>
             <Routes>
+                <Route path='/home' Component={() => Home("")}/>
                 <Route path='/home/people*' Component={TablePeople}/>
                 <Route path='/home/planets*' Component={TablePlanets}/>
                 <Route path='/home/films*' Component={TableFilms}/>

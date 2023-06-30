@@ -14,6 +14,10 @@ const Home = (page: string) => {
                 <Tabs value={page} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label={"People"} value={"/home/people"}/>
                     <Tab label={"Planets"} value={"/home/planets"}/>
+                    <Tab label={"Films"} value={"/home/films"}/>
+                    <Tab label={"Species"} value={"/home/species"}/>
+                    <Tab label={"Vehicles"} value={"/home/vehicles"}/>
+                    <Tab label={"Starships"} value={"/home/starships"}/>
                 </Tabs>
             </Box>
         </>

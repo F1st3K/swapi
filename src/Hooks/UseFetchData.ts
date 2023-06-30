@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {JsonRecord} from "../Types/JsonObject";
 
-type FetchState<T> = {
+export type FetchState<T> = {
     data: T | null;
     isLoading: boolean;
     error: Error | null;

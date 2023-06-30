@@ -10,7 +10,7 @@ type MuiPuginationProps = {
     onRowsPerPageChanged?: (newRowsPerPage: number) => void;
 }
 
-const MuiPugination = ({countRows, currentPage, varsRowsPerPage, onPageChanged, onRowsPerPageChanged}:MuiPuginationProps) => {
+const MuiPagination = ({countRows, currentPage, varsRowsPerPage, onPageChanged, onRowsPerPageChanged}:MuiPuginationProps) => {
     const [rowsPerPage, setRowsPerPage] = useState(varsRowsPerPage[0]);
 
     const handleChangePage = (event: unknown, newPage: number) => {
@@ -34,4 +34,4 @@ const MuiPugination = ({countRows, currentPage, varsRowsPerPage, onPageChanged, 
     );
 }
 
-export default MuiPugination;
+export default MuiPagination;

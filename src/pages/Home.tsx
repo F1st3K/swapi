@@ -1,22 +1,26 @@
 import React from 'react';
-import RouteTabs, {Tab} from "../components/RouteTabs/RouteTabs";
-import TablePeople from "./TablePeople";
-import TablePlanets from "./TablePlanets";
+import {Box, Tab, Tabs} from "@mui/material";
+import {useLocation, useNavigate} from "react-router-dom";
 
-const Home = () => {
-    const tabs: Tab[] = [{
-        title: 'peoples',
-        path: '/home/peoples',
-        component: TablePeople,
-    },{
-        title: 'planets',
-        path: '/home/planets',
-        component: TablePlanets,
-    }];
+const Home = (page: string) => {
+    const navigate = useNavigate();
+    const handleChange = (event: React.SyntheticEvent, newUrl: string) => {
+        navigate(newUrl);
+    };
+
     return (
-        <div>
-            {/*<RouteTabs tabs={tabs}/>*/}
-        </div>
+        <>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={page} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label={"People"} value={"/home/people"}/>
+                    <Tab label={"Planets"} value={"/home/planets"}/>
+                    <Tab label={"Films"} value={"/home/films"}/>
+                    <Tab label={"Species"} value={"/home/species"}/>
+                    <Tab label={"Vehicles"} value={"/home/vehicles"}/>
+                    <Tab label={"Starships"} value={"/home/starships"}/>
+                </Tabs>
+            </Box>
+        </>
     );
 }
 

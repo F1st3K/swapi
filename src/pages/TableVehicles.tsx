@@ -1,20 +1,21 @@
 import React from "react";
-import {getPlanets} from "../services/Swapi";
 import MuiDataView from "../components/MuiDataView/MuiDataView";
+import {getPeople} from "../services/Swapi";
 import Home from "./Home";
 
-const TablePlanets = () => {
-    const tabs = Home("/home/planets")
+
+const TableVehicles = () => {
+    const tabs = Home("/home/vehicles")
     return (
         <>
             {tabs}
             <MuiDataView
-                getTableData={getPlanets}
-                countRows={90}
+                getTableData={getPeople}
+                countRows={83}
                 varsRowsPerPage={[10]}
             />
         </>
     );
 }
 
-export default TablePlanets;
+export default TableVehicles;

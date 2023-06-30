@@ -19,17 +19,17 @@ const MuiDataView = ({getTableData, countRows, varsRowsPerPage}: PropsMuiDataVie
     const {data, isLoading, error} = getTableData(currentPage);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <>Loading...</>;
     }
 
     const table: DataTable = data ? DataTable.getTableFrom(data) : new DataTable([]);
 
     if (!table.rows.length || error) {
-        return <div>No data available</div>;
+        return <>No data available</>;
     }
 
     return (
-        <div>
+        <>
             <MuiTable table={table} />
             <MuiPagination
                 countRows={countRows}
@@ -37,7 +37,7 @@ const MuiDataView = ({getTableData, countRows, varsRowsPerPage}: PropsMuiDataVie
                 varsRowsPerPage={varsRowsPerPage}
                 onPageChanged={setCurrentPage}
             />
-        </div>
+        </>
     );
 }
 

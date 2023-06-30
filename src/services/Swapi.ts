@@ -1,4 +1,4 @@
-import UseFetchData from "../Hooks/UseFetchData";
+import UseFetchData, {FetchState} from "../Hooks/UseFetchData";
 import {JsonArray, JsonObject, JsonRecord} from "../Types/JsonObject";
 
 const API = "https://swapi.dev/api";
@@ -131,32 +131,32 @@ const getPage = (page: number) => {
     return "/?page=" + (page + 1);
 }
 
+const getResult = <T extends JsonRecord<T>>(fetch: FetchState<T>) => {
+    return {data: fetch.data?.results === undefined ? null : fetch.data?.results as JsonObject<T>[],
+        isLoading: fetch.isLoading,
+        error: fetch.error};
+}
+
 export const getPeople = <T extends JsonRecord<T>>(page: number) => {
-    const fetch = UseFetchData<JsonObject<Page<JsonObject<People>>>>(API+PEOPLE+getPage(page));
-    return {data: fetch.data?.results === undefined ? null : fetch.data?.results as JsonObject<T>[], isLoading: fetch.isLoading, error: fetch.error};
+    return getResult(UseFetchData<JsonObject<Page<JsonObject<People>>>>(API+PEOPLE+getPage(page)));
 }
 
 export const getPlanets = (page: number) => {
-    const fetch = UseFetchData<JsonObject<Page<Planets>>>(API+PLANETS+getPage(page));
-    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
+    return getResult(UseFetchData<JsonObject<Page<JsonObject<Planets>>>>(API+PLANETS+getPage(page)));
 }
 
 export const getFilms = (page: number) => {
-    const fetch = UseFetchData<JsonObject<Page<Films>>>(API+FIlMS+getPage(page));
-    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
+    return getResult(UseFetchData<JsonObject<Page<JsonObject<Films>>>>(API+FIlMS+getPage(page)));
 }
 
 export const getSpecies = (page: number) => {
-    const fetch = UseFetchData<JsonObject<Page<Species>>>(API+SPECIES+getPage(page));
-    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
+    return getResult(UseFetchData<JsonObject<Page<JsonObject<Species>>>>(API+SPECIES+getPage(page)));
 }
 
 export const getVehicles = (page: number) => {
-    const fetch = UseFetchData<JsonObject<Page<Vehicles>>>(API+VEHICLES+getPage(page));
-    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
+    return getResult(UseFetchData<JsonObject<Page<JsonObject<Vehicles>>>>(API+VEHICLES+getPage(page)));
 }
 
 export const getStarships = (page: number) => {
-    const fetch = UseFetchData<JsonObject<Page<Starships>>>(API+STARSHIPS+getPage(page));
-    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
+    return getResult(UseFetchData<JsonObject<Page<JsonObject<Starships>>>>(API+STARSHIPS+getPage(page)));
 }

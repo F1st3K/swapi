@@ -6,9 +6,10 @@ import {JsonObject, JsonRecord} from "../../Types/JsonObject";
 
 type PropsMuiDataView = {
     getTableData: <T extends JsonRecord<T>>(page: number) => {
-        data: JsonObject<T>[] | null;
+        data: Array<JsonObject<T>> | null;
         isLoading: boolean;
-        error: Error | null;};
+        error: Error | null;
+    };
     countRows: number;
     varsRowsPerPage: number[];
 };

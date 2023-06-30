@@ -131,10 +131,10 @@ const getPage = (page: number) => {
     return "/?page=" + (page + 1);
 }
 
-export const getPeople = ((page: number) => {
-    const fetch = UseFetchData<JsonObject<Page<People>>>(API+PEOPLE+getPage(page));
-    return {data: fetch.data?.results, isLoading: fetch.isLoading, Error: fetch.error};
-});
+export const getPeople = <T extends JsonRecord<T>>(page: number) => {
+    const fetch = UseFetchData<JsonObject<Page<JsonObject<People>>>>(API+PEOPLE+getPage(page));
+    return {data: fetch.data?.results === undefined ? null : fetch.data?.results as JsonObject<T>[], isLoading: fetch.isLoading, error: fetch.error};
+}
 
 export const getPlanets = (page: number) => {
     const fetch = UseFetchData<JsonObject<Page<Planets>>>(API+PLANETS+getPage(page));

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {getPlanets} from "../services/Swapi";
 import DataTable from "../Types/DataTable";
 import MuiTable from "../components/MuiTable/MuiTable";
-import MuiPagination from "../components/MuiPagination/MuiPugination";
+import MuiPagination from "../components/MuiPagination/MuiPagination";
 
 const TablePlanets = () => {
     return <></>;

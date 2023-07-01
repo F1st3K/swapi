@@ -1,6 +1,6 @@
 import React from "react";
 import MuiDataView from "../components/MuiDataView/MuiDataView";
-import {getPeople, getStarships} from "../services/Swapi";
+import {getStarships} from "../services/Swapi";
 import Home from "./Home";
 
 

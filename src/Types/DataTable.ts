@@ -31,7 +31,7 @@ export default class DataTable {
         if (rows) rows.map((row) => {this.addRow(row)})
     }
 
-    addRow(values: DataRow) {
+    public addRow(values: DataRow) {
         if (values.length !== this.columns.length)
             throw new Error("The number of values does not match the number of columns.");
 
@@ -45,7 +45,7 @@ export default class DataTable {
         this.rows.push(values);
     }
 
-    deleteRow(rowIndex: number) {
+    public deleteRow(rowIndex: number) {
         this.rows.splice(rowIndex, 1);
     }
 }

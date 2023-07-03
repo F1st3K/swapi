@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DataTable, {DataRow} from "../../Types/DataTable";
 
-import MuiTableEditRow from "../MuiTableRow/MuiTableEditRow";
+import MuiTableEditRow from "../MuiTableEditRow/MuiTableEditRow";
 
 type MuiTableProps = {
     table: DataTable;

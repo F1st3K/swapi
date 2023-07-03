@@ -6,6 +6,8 @@ import {IconButton} from "@mui/material";
 import MuiEditRowModal from "../MuiEditRowModal/MuiEditRowModal";
 import EditIcon from '@mui/icons-material/Edit';
 import {useState} from "react";
+import MuiRemoveRowModal from "../MuiDeleteRowModal/MuiRemoveRowModal";
+import {Delete} from "@mui/icons-material";
 
 type PropsMuiTableEditRow = {
     row: DataRow;
@@ -14,9 +16,14 @@ type PropsMuiTableEditRow = {
 }
 
 const MuiTableEditRow = ({row, columns, key}: PropsMuiTableEditRow) => {
-    const [openModal, setOpenModal] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
+    const [openDelete, setOpenRemove] = useState(false);
+    const [isRemoving, setIsRemoving] = useState(false);
     const [editRow, setEditRow] = useState(row);
-    const handleEdit = () => setOpenModal(true);
+    const handleEdit = () => setOpenEdit(true);
+    const handleRemove = () => setOpenRemove(true);
+
+    if (isRemoving) return (<></>);
 
     let i = -1;
     return (
@@ -33,13 +40,21 @@ const MuiTableEditRow = ({row, columns, key}: PropsMuiTableEditRow) => {
                 <IconButton onClick={handleEdit}>
                     <EditIcon/>
                 </IconButton>
+                <IconButton onClick={handleRemove}>
+                    <Delete/>
+                </IconButton>
             </TableCell>
             <MuiEditRowModal
-                open={openModal}
-                setOpen={setOpenModal}
+                open={openEdit}
+                setOpen={setOpenEdit}
                 row={editRow}
-                setRow={setEditRow}
+                editRow={setEditRow}
                 columns={columns}
+            />
+            <MuiRemoveRowModal
+                open={openDelete}
+                setOpen={setOpenRemove}
+                removeRow={() => setIsRemoving(true)}
             />
         </TableRow>
     );

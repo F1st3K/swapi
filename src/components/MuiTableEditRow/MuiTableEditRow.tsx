@@ -14,13 +14,13 @@ type PropsMuiTableEditRow = {
 
 const MuiTableEditRow = ({row, columns, key}: PropsMuiTableEditRow) => {
     const [openModal, setOpenModal] = useState(false);
-
+    const [editRow, setEditRow] = useState(row);
     const handleEdit = () => setOpenModal(true);
 
     let i = -1;
     return (
         <TableRow hover role="checkbox" tabIndex={-1} key={key}>
-            {row.map((cell) => {
+            {editRow.map((cell) => {
                 i++;
                 return (
                     <TableCell key={i}>
@@ -31,7 +31,13 @@ const MuiTableEditRow = ({row, columns, key}: PropsMuiTableEditRow) => {
             <TableCell key={i+1}>
                 <Button onClick={handleEdit}>Edit</Button>
             </TableCell>
-            <MuiEditRowModal open={openModal} handleClose={() => setOpenModal(false)}/>
+            <MuiEditRowModal
+                open={openModal}
+                setOpen={setOpenModal}
+                row={editRow}
+                setRow={setEditRow}
+                columns={columns}
+            />
         </TableRow>
     );
 }

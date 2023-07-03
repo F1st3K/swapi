@@ -8,12 +8,14 @@ import TableStarships from "./TableStarships";
 import TableVehicles from "./TableVehicles";
 import Home from "./Home";
 import swapi from "./Swapi";
+import Maps from "./Maps";
 
 function ClientRoutes() {
     return (
         <>
             <Routes>
                 <Route path='/' Component={() => Home("")}/>
+
                 <Route path='/swapi' Component={() => swapi("")}/>
                 <Route path='/swapi/people' Component={TablePeople}/>
                 <Route path='/swapi/planets' Component={TablePlanets}/>
@@ -28,6 +30,10 @@ function ClientRoutes() {
                 <Route path='/swapi/vehicles*' element={<Navigate to={"/swapi/vehicles"}/>}/>
                 <Route path='/swapi/starships*' element={<Navigate to={"/swapi/starships"}/>}/>
                 <Route path="/swapi*" element={<Navigate to={"/swapi"}/>}/>
+
+                <Route path='/maps' Component={() => Maps()}/>
+                <Route path="/maps*" element={<Navigate to={"/maps"}/>}/>
+
                 <Route path="*" element={<Navigate to={"/"}/>}/>
             </Routes>
         </>

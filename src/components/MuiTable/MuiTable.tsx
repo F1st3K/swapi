@@ -6,7 +6,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import DataTable  from "../../Types/DataTable";
+import DataTable, {DataRow} from "../../Types/DataTable";
+import MuiTableRow from "../MuiTableRow/MuiTableRow";
 
 type MuiTableProps = {
     table: DataTable;
@@ -28,19 +29,8 @@ const MuiTable = ({table}: MuiTableProps) => {
                     </TableHead>
                     <TableBody>
                         {table.rows
-                            .map((row, i) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={i}>
-                                        {table.columns.map((column, j) => {
-                                            const value = row[j];
-                                            return (
-                                                <TableCell key={j}>
-                                                    {value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
-                                );
+                            .map((row :DataRow, i) => {
+                                return (<MuiTableRow row={row} key={i}/>);
                             })}
                     </TableBody>
                 </Table>

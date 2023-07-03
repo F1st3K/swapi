@@ -1,11 +1,11 @@
 import React from "react";
 import MuiDataView from "../components/MuiDataView/MuiDataView";
 import {getSpecies} from "../services/Swapi";
-import Home from "./Home";
+import Swapi from "./Swapi";
 
 
 const TableSpecies = () => {
-    const tabs = Home("/home/species")
+    const tabs = Swapi("/home/swapi/species")
     return (
         <>
             {tabs}

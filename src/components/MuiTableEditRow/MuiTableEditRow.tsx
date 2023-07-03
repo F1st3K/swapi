@@ -2,8 +2,9 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import * as React from "react";
 import {DataColumn, DataRow} from "../../Types/DataTable";
-import {Button} from "@mui/material";
+import {IconButton} from "@mui/material";
 import MuiEditRowModal from "../MuiEditRowModal/MuiEditRowModal";
+import EditIcon from '@mui/icons-material/Edit';
 import {useState} from "react";
 
 type PropsMuiTableEditRow = {
@@ -29,7 +30,9 @@ const MuiTableEditRow = ({row, columns, key}: PropsMuiTableEditRow) => {
                 );
             })}
             <TableCell key={i+1}>
-                <Button onClick={handleEdit}>Edit</Button>
+                <IconButton onClick={handleEdit}>
+                    <EditIcon/>
+                </IconButton>
             </TableCell>
             <MuiEditRowModal
                 open={openModal}

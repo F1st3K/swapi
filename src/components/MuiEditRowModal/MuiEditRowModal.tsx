@@ -41,14 +41,16 @@ const MuiEditRowModal = ({open, setOpen, row, setRow, columns}: PropsMuiEditRowM
                         </>
                     );
                 })}
-                <Button onClick={handleEdit}>Edit</Button>
-                <Button onClick={handleClose}>Close</Button>
+                <Button onClick={handleEdit} variant="outlined" color="success">Edit</Button>
+                <Button onClick={handleClose} variant="outlined" color="error">Close</Button>
             </Box>
         </Modal>
     );
 }
 
 const style = {
+    display: 'flex',
+    flexDirection: 'column',
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',

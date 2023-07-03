@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navigate, Route, Routes,} from 'react-router-dom';
+import {Route, Routes,} from 'react-router-dom';
 import TablePeople from "./TablePeople";
 import TablePlanets from "./TablePlanets";
 import TableFilms from "./TableFilms";

@@ -28,7 +28,7 @@ export default class DataTable {
     constructor(columns: DataColumn[], rows?: DataRow[]) {
         this.columns = columns;
         this.rows = [];
-        if (rows) rows.map((row) => {this.addRow(row)})
+        if (rows) rows.map((row) => this.addRow(row))
     }
 
     public addRow(values: DataRow) {

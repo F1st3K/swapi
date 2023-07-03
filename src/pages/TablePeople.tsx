@@ -5,10 +5,10 @@ import Swapi from "./Swapi";
 
 
 const TablePeople = () => {
-    const tabs = Swapi("/home/swapi/people")
+    const swapiTabs = Swapi("/swapi/people");
     return (
         <>
-            {tabs}
+            {swapiTabs}
             <MuiDataView
                 getTableData={getPeople}
                 countRows={83}

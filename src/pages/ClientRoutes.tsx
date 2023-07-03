@@ -13,22 +13,22 @@ function ClientRoutes() {
     return (
         <>
             <Routes>
-                <Route path='/home' Component={() => Home("")}/>
-                <Route path='/home/swapi' Component={() => swapi("")}/>
-                <Route path='/home/swapi/people' Component={TablePeople}/>
-                <Route path='/home/swapi/planets' Component={TablePlanets}/>
-                <Route path='/home/swapi/films' Component={TableFilms}/>
-                <Route path='/home/swapi/species' Component={TableSpecies}/>
-                <Route path='/home/swapi/vehicles' Component={TableVehicles}/>
-                <Route path='/home/swapi/starships' Component={TableStarships}/>
-                <Route path='/home/swapi/people*' element={<Navigate to={"/home/swapi/people"}/>}/>
-                <Route path='/home/swapi/planets*' element={<Navigate to={"/home/swapi/planets"}/>}/>
-                <Route path='/home/swapi/films*' element={<Navigate to={"/home/swapi/films"}/>}/>
-                <Route path='/home/swapi/species*' element={<Navigate to={"/home/swapi/species"}/>}/>
-                <Route path='/home/swapi/vehicles*' element={<Navigate to={"/home/swapi/vehicles"}/>}/>
-                <Route path='/home/swapi/starships*' element={<Navigate to={"/home/swapi/starships"}/>}/>
-                <Route path="/home/swapi*" element={<Navigate to={"/home/swapi"}/>}/>
-                <Route path="*" element={<Navigate to={"/home"}/>}/>
+                <Route path='/' Component={() => Home("")}/>
+                <Route path='/swapi' Component={() => swapi("")}/>
+                <Route path='/swapi/people' Component={TablePeople}/>
+                <Route path='/swapi/planets' Component={TablePlanets}/>
+                <Route path='/swapi/films' Component={TableFilms}/>
+                <Route path='/swapi/species' Component={TableSpecies}/>
+                <Route path='/swapi/vehicles' Component={TableVehicles}/>
+                <Route path='/swapi/starships' Component={TableStarships}/>
+                <Route path='/swapi/people*' element={<Navigate to={"/swapi/people"}/>}/>
+                <Route path='/swapi/planets*' element={<Navigate to={"/swapi/planets"}/>}/>
+                <Route path='/swapi/films*' element={<Navigate to={"/swapi/films"}/>}/>
+                <Route path='/swapi/species*' element={<Navigate to={"/swapi/species"}/>}/>
+                <Route path='/swapi/vehicles*' element={<Navigate to={"/swapi/vehicles"}/>}/>
+                <Route path='/swapi/starships*' element={<Navigate to={"/swapi/starships"}/>}/>
+                <Route path="/swapi*" element={<Navigate to={"/swapi"}/>}/>
+                <Route path="*" element={<Navigate to={"/"}/>}/>
             </Routes>
         </>
     );

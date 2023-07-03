@@ -4,10 +4,10 @@ import MuiDataView from "../components/MuiDataView/MuiDataView";
 import Swapi from "./Swapi";
 
 const TablePlanets = () => {
-    const tabs = Swapi("/home/swapi/planets")
+    const swapiTabs = Swapi("/swapi/planets");
     return (
         <>
-            {tabs}
+            {swapiTabs}
             <MuiDataView
                 getTableData={getPlanets}
                 countRows={90}

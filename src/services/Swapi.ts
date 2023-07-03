@@ -137,7 +137,7 @@ const getResult = <T extends JsonRecord<T>>(fetch: FetchState<T>) => {
         error: fetch.error};
 }
 
-export const getPeople = <T extends JsonRecord<T>>(page: number) => {
+export const getPeople = (page: number) => {
     return getResult(UseFetchData<JsonObject<Page<JsonObject<People>>>>(API+PEOPLE+getPage(page)));
 }
 

@@ -1,14 +1,14 @@
 import React from "react";
 import MuiDataView from "../components/MuiDataView/MuiDataView";
 import {getVehicles} from "../services/Swapi";
-import Home from "./Home";
+import Swapi from "./Swapi";
 
 
 const TableVehicles = () => {
-    const tabs = Home("/home/vehicles")
+    const swapiTabs = Swapi("/swapi/vehicles");
     return (
         <>
-            {tabs}
+            {swapiTabs}
             <MuiDataView
                 getTableData={getVehicles}
                 countRows={83}

@@ -1,4 +1,4 @@
-import {Box, Button, Modal} from "@mui/material";
+import {Box, Button, Modal, TextField} from "@mui/material";
 import {DataColumn, DataRow} from "../../Types/DataTable";
 
 type PropsMuiEditRowModal = {
@@ -10,9 +10,10 @@ type PropsMuiEditRowModal = {
 }
 
 const MuiEditRowModal = ({open, setOpen, row, setRow, columns}: PropsMuiEditRowModal) => {
+    let editRow: DataRow = row.map((cell) => cell);
+
     const handleEdit = () => {
-        row[0] = "wertyuytre";
-        setRow(row);
+        setRow(editRow);
         setOpen(false);
     }
     const handleClose = () => setOpen(false);
@@ -25,6 +26,21 @@ const MuiEditRowModal = ({open, setOpen, row, setRow, columns}: PropsMuiEditRowM
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
+                {row.map((cell, i) => {
+                    return (
+                        <>
+                            <TextField
+                                id="standard-basic"
+                                label={columns[i].title}
+                                onChange={(event) => {
+                                    editRow[i] = event.target.value;
+                                }}
+                                defaultValue={cell}
+                                variant="standard"
+                            />
+                        </>
+                    );
+                })}
                 <Button onClick={handleEdit}>Edit</Button>
                 <Button onClick={handleClose}>Close</Button>
             </Box>

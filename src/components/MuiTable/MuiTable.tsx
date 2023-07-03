@@ -7,7 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DataTable, {DataRow} from "../../Types/DataTable";
-import MuiTableRow from "../MuiTableRow/MuiTableRow";
+
+import MuiTableEditRow from "../MuiTableRow/MuiTableEditRow";
 
 type MuiTableProps = {
     table: DataTable;
@@ -30,7 +31,7 @@ const MuiTable = ({table}: MuiTableProps) => {
                     <TableBody>
                         {table.rows
                             .map((row :DataRow, i) => {
-                                return (<MuiTableRow row={row} key={i}/>);
+                                return (<MuiTableEditRow row={row} columns={table.columns} key={i}/>);
                             })}
                     </TableBody>
                 </Table>

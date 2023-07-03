@@ -5,15 +5,15 @@ type PropsMuiEditRowModal = {
     open: boolean;
     setOpen: (open: boolean) => void;
     row: DataRow;
-    setRow: (row: DataRow) => void;
+    editRow: (row: DataRow) => void;
     columns: DataColumn[];
 }
 
-const MuiEditRowModal = ({open, setOpen, row, setRow, columns}: PropsMuiEditRowModal) => {
-    let editRow: DataRow = row.map((cell) => cell);
+const MuiEditRowModal = ({open, setOpen, row, editRow, columns}: PropsMuiEditRowModal) => {
+    let tempRow: DataRow = row.map((cell) => cell);
 
     const handleEdit = () => {
-        setRow(editRow);
+        editRow(tempRow);
         setOpen(false);
     }
     const handleClose = () => setOpen(false);
@@ -33,7 +33,7 @@ const MuiEditRowModal = ({open, setOpen, row, setRow, columns}: PropsMuiEditRowM
                                 id="standard-basic"
                                 label={columns[i].title}
                                 onChange={(event) => {
-                                    editRow[i] = event.target.value;
+                                    tempRow[i] = event.target.value;
                                 }}
                                 defaultValue={cell}
                                 variant="standard"

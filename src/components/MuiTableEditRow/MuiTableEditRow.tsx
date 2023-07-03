@@ -14,9 +14,10 @@ type PropsMuiTableEditRow = {
 }
 
 const MuiTableEditRow = ({row, columns, key}: PropsMuiTableEditRow) => {
-    const [openModal, setOpenModal] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
     const [editRow, setEditRow] = useState(row);
-    const handleEdit = () => setOpenModal(true);
+    const handleEdit = () => setOpenEdit(true);
 
     let i = -1;
     return (
@@ -33,10 +34,20 @@ const MuiTableEditRow = ({row, columns, key}: PropsMuiTableEditRow) => {
                 <IconButton onClick={handleEdit}>
                     <EditIcon/>
                 </IconButton>
+                <IconButton onClick={handleEdit}>
+                    <EditIcon/>
+                </IconButton>
             </TableCell>
             <MuiEditRowModal
-                open={openModal}
-                setOpen={setOpenModal}
+                open={openEdit}
+                setOpen={setOpenEdit}
+                row={editRow}
+                setRow={setEditRow}
+                columns={columns}
+            />
+            <MuiEditRowModal
+                open={openEdit}
+                setOpen={setOpenEdit}
                 row={editRow}
                 setRow={setEditRow}
                 columns={columns}

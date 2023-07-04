@@ -1,29 +1,54 @@
 import LeafletMap from "./LeafletMap";
 import {LatLngExpression} from "leaflet";
 import {GetPositionState} from "../../Hooks/UseCurrentGeoPosition";
-import React from "react";
+import LoadingButton from '@mui/lab/LoadingButton';
+import {MyLocation} from "@mui/icons-material";
+import React, {useState} from "react";
 
 type PropsLeafLetUL = {
     defaultPosition: LatLngExpression;
     getYouLocation: () => GetPositionState;
 }
 
+type PropsGetLocation = {
+    setLoading: (loading: boolean) => void;
+    setPosition: (position: LatLngExpression) => void;
+    getPosition: () => GetPositionState;
+}
+
+const GetLocation = ({setLoading, setPosition, getPosition}:PropsGetLocation) => {
+    const {data, isLoading, error} = getPosition();
+    setLoading(isLoading);
+    if (!isLoading && !error && data)
+        setPosition([data.coords.latitude, data.coords.longitude]);
+    return null;
+}
+
 const LeafletMapUL = ({defaultPosition, getYouLocation}: PropsLeafLetUL) => {
-    let youLocation :GetPositionState = {data: null, isLoading: false, error: null};
-    let position:LatLngExpression = youLocation.data
-        ? [youLocation.data.coords.latitude, youLocation.data.coords.longitude]
-        : defaultPosition;
-    const handleGetLocation = () => {
-        youLocation = getYouLocation();
+    const [loading, setLoading] = useState<boolean>(false);
+    const [position, setPosition] = useState(defaultPosition);
+
+    const handleSetPosition = () => {
+        setLoading(true);
     }
 
-
-
-    if (youLocation.isLoading || youLocation.error)
-        return <>Loading...</>
     return (
         <>
+            {loading
+                ? (<GetLocation setLoading={setLoading} setPosition={setPosition} getPosition={getYouLocation}/>)
+                : (<></>)
+            }
             <LeafletMap position={position}/>
+            <LoadingButton
+                size="small"
+                onClick={handleSetPosition}
+                endIcon={<MyLocation />}
+                loading={loading}
+                loadingPosition="end"
+                variant="contained"
+            >
+                <span>Set my location</span>
+            </LoadingButton>
         </>
     );
 }

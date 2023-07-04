@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Home from "./Home";
 import {LatLngExpression} from "leaflet";
 import {Box} from "@mui/material";
 import "leaflet/dist/leaflet.css";
 import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
-import LeafletMap from "../components/LeafletMap/LeafletMap";
 import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
 
 const defaultPosition: LatLngExpression = [51.505, -0.09];

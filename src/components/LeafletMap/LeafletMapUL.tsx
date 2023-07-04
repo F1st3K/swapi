@@ -9,12 +9,18 @@ type PropsLeafLetUL = {
 }
 
 const LeafletMapUL = ({defaultPosition, getYouLocation}: PropsLeafLetUL) => {
-    let position:LatLngExpression = defaultPosition;
-    const {data, isLoading, error} = getYouLocation();
+    let youLocation :GetPositionState = {data: null, isLoading: false, error: null};
+    let position:LatLngExpression = youLocation.data
+        ? [youLocation.data.coords.latitude, youLocation.data.coords.longitude]
+        : defaultPosition;
+    const handleGetLocation = () => {
+        youLocation = getYouLocation();
+    }
 
-    if (isLoading)
+
+
+    if (youLocation.isLoading || youLocation.error)
         return <>Loading...</>
-    position = data ? [data.coords.latitude, data.coords.longitude] : defaultPosition;
     return (
         <>
             <LeafletMap position={position}/>

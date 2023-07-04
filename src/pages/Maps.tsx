@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Home from "./Home";
-import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
+import {MapContainer, Marker, Popup, TileLayer, useMap} from "react-leaflet";
 import {LatLngExpression} from "leaflet";
 import {Box} from "@mui/material";
 import "leaflet/dist/leaflet.css";
@@ -14,13 +14,31 @@ const markerIcon = L.icon({
     popupAnchor: [0, -41],
 });
 
+const defaultPosition: LatLngExpression = [51.505, -0.09];
+
+type LatLngPosition = {
+    position: LatLngExpression;
+}
+
+const ChangeMapView = ({position}: LatLngPosition) => {
+    const map = useMap();
+
+    useEffect(() => {
+        map.setView(position);
+    }, [position]);
+
+    return null;
+}
+
 const Maps = () => {
-    const [position, setPosition] = useState<LatLngExpression | null>(null);
+    const [position, setPosition] = useState<LatLngExpression>(defaultPosition);
+    const [posIsDefault, setPosIsDefault] = useState(true);
     let currentPosition: GetPositionState = useCurrentGeoPosition();
     const homeTabs = Home("/maps");
 
     useEffect(() => {
-        if (currentPosition.data && !position) {
+        if (currentPosition.data && posIsDefault) {
+            setPosIsDefault(false);
             setPosition([currentPosition.data.coords.latitude, currentPosition.data.coords.longitude]);
         }
     }, [currentPosition])
@@ -29,12 +47,13 @@ const Maps = () => {
         <>
             {homeTabs}
             <Box sx={style}>
-                <MapContainer center={position ? position : [51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{width: '100%', height: '100%'}}>
+                <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{width: '100%', height: '100%'}}>
+                    <ChangeMapView position={position}/>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Marker position={position ? position : [51.505, -0.09]} icon={markerIcon}>
+                    <Marker position={position} icon={markerIcon}>
                         <Popup>
                             A pretty CSS3 popup. <br /> Easily customizable.
                         </Popup>

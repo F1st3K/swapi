@@ -5,22 +5,18 @@ import {Box} from "@mui/material";
 import "leaflet/dist/leaflet.css";
 import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
 import LeafletMap from "../components/LeafletMap/LeafletMap";
+import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
 
 const defaultPosition: LatLngExpression = [51.505, -0.09];
 
 const Maps = () => {
     const homeTabs = Home("/maps");
-    let position:LatLngExpression = defaultPosition;
-    const {data, isLoading, error} = useCurrentGeoPosition(navigator.geolocation);
 
-    if (isLoading)
-        return <>Loading...</>
-    position = data ? [data.coords.latitude, data.coords.longitude] : defaultPosition;
     return (
         <>
             {homeTabs}
             <Box sx={style}>
-                <LeafletMap position={position}/>
+                <LeafletMapUL defaultPosition={defaultPosition} getYouLocation={useCurrentGeoPosition}/>
             </Box>
         </>
     );

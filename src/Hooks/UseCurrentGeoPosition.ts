@@ -12,7 +12,7 @@ const getLocation = (geolocation: Geolocation) => {
     });
 }
 
-const useCurrentGeoPosition = (geolocation: Geolocation): GetPositionState => {
+const useCurrentGeoPosition = (): GetPositionState => {
     const [position, setPosition] = useState<GeolocationPosition | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
@@ -20,8 +20,8 @@ const useCurrentGeoPosition = (geolocation: Geolocation): GetPositionState => {
     useEffect(() => {
         const getPosition = async () => {
             try {
-                if (geolocation) {
-                    const location = await getLocation(geolocation);
+                if (navigator.geolocation) {
+                    const location = await getLocation(navigator.geolocation);
                     setPosition(location);
                 } else {
                     throw new Error("Your browser is not geolocation supported.")
@@ -34,7 +34,7 @@ const useCurrentGeoPosition = (geolocation: Geolocation): GetPositionState => {
         };
         setIsLoading(true);
         getPosition();
-    }, [geolocation]);
+    }, [navigator.geolocation]);
 
     return { data: position, isLoading, error };
 }

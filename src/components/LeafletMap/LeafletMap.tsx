@@ -10,11 +10,11 @@ const markerIcon = L.icon({
     popupAnchor: [0, -41],
 });
 
-type LatLngPosition = {
+type PropsLeafLet = {
     position: LatLngExpression;
 }
 
-const ChangeMapView = ({position}: LatLngPosition) => {
+const ChangeMapView = ({position}: PropsLeafLet) => {
     const map = useMap();
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const ChangeMapView = ({position}: LatLngPosition) => {
     return null;
 }
 
-const LeafletMap = ({position}: LatLngPosition) => {
+const LeafletMap = ({position}: PropsLeafLet) => {
     return (
         <>
             <MapContainer center={position} zoom={13} scrollWheelZoom={true} style={{width: '100%', height: '100%'}}>

@@ -34,7 +34,7 @@ const useCurrentGeoPosition = (): GetPositionState => {
         };
         setIsLoading(true);
         getPosition();
-    }, [navigator.geolocation]);
+    }, []);
 
     return { data: position, isLoading, error };
 }

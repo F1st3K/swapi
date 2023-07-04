@@ -19,7 +19,7 @@ const ChangeMapView = ({position}: PropsLeafLet) => {
 
     useEffect(() => {
         map.setView(position);
-    }, [position]);
+    });
 
     return null;
 }

@@ -11,8 +11,7 @@ export default class Polygon {
             if (points.length < Polygon.MIN_COUNT_POINT)
                 throw new Error(points.length + " points too small to build a polygon.");
             this.PolygonPoints = points;
-            if (rule)
-                rule.CheckOnRule(this);
+            rule?.CheckOnRule(this);
         } catch (e) {
             if (e && typeof e === 'object' && 'message' in e)
                 throw new Error("Error on create polygon: " + e.message);
@@ -34,6 +33,19 @@ export default class Polygon {
         return S;
     }
 
+    public getPerimeter(): number {
+        const length = this.PolygonPoints.length;
+        let P: number = 0;
+        this.PolygonPoints.map((point, i) => {
+            const X = point[0];
+            const Y = point[1];
+            const Xnext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][0];
+            const Ynext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][1];
+            P += (Xnext - X)**2 + (Ynext - Y)**2;
+        })
+        return P;
+    }
+
     public getMaxPolygonSide(): number {
         const length = this.PolygonPoints.length;
         let maxSide: number = 0;
@@ -48,5 +60,4 @@ export default class Polygon {
         maxSide **= (1/2)
         return maxSide;
     }
-
 }

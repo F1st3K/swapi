@@ -1,8 +1,6 @@
-import {MapContainer, Marker, Polygon, TileLayer, useMap} from "react-leaflet";
+import {MapContainer, Marker, TileLayer, useMap} from "react-leaflet";
 import React, {useEffect} from "react";
 import L, {LatLngExpression} from "leaflet";
-import RulePolygon from "../../Types/RulePolygon";
-import DataPolygon from "../../Types/Polygon";
 
 
 const markerIcon = L.icon({
@@ -27,10 +25,6 @@ const ChangeMapView = ({position}: PropsLeafLet) => {
 }
 
 const LeafletMap = ({position}: PropsLeafLet) => {
-    const polygon = new DataPolygon([
-        [89.4, 6.93], [66.54, 71.08], [66.01, 11.48], [-44.48, 98.81], [78.54, 91.42],
-        // [1, 0], [0, 1], [1, 1], [0, 0],
-    ], new RulePolygon({maxSquare: 100}));
     return (
         <>
             <MapContainer center={position} zoom={13} scrollWheelZoom={true} style={{width: '100%', height: '100%'}}>
@@ -40,7 +34,6 @@ const LeafletMap = ({position}: PropsLeafLet) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={position} icon={markerIcon}/>
-                <Polygon positions={polygon.PolygonPoints} color={'green'}/>
             </MapContainer>
         </>
     );

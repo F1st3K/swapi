@@ -1,8 +1,10 @@
+import Polygon from "./Polygon";
+
 export default class RulePolygon {
     constructor() {
     }
 
-    public CheckOnRule(): void {
+    public CheckOnRule(polygon: Polygon): void {
 
     }
 }

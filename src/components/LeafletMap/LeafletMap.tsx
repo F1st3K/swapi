@@ -30,7 +30,7 @@ const LeafletMap = ({position}: PropsLeafLet) => {
     const polygon = new DataPolygon([
         [89.4, 6.93], [66.54, 71.08], [66.01, 11.48], [-44.48, 98.81],
         // [1, 0], [0, 1], [1, 1], [0, 0],
-    ], new RulePolygon({maxPerimeter: 100}));
+    ], new RulePolygon({maxPerimeter: 54400}));
     return (
         <>
             <MapContainer center={position} zoom={13} scrollWheelZoom={true} style={{width: '100%', height: '100%'}}>

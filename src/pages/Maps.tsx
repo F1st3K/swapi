@@ -12,15 +12,11 @@ const defaultPosition: LatLngExpression = [51.505, -0.09];
 
 const Maps = () => {
     const homeTabs = Home("/maps");
-    const t = new Polygon([
-        [289.4, 206.93], [266.54, 471.08], [66.01, 511.48], [-44.48, 398.81], [78.54, 191.42]
-    ], new RulePolygon(5000));
     return (
         <>
             {homeTabs}
             <Box sx={style}>
                 <LeafletMapUL defaultPosition={defaultPosition} getYouLocation={useCurrentGeoPosition}/>
-                {t.getSquare()}
             </Box>
         </>
     );

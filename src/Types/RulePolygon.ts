@@ -21,9 +21,11 @@ export default class RulePolygon {
         if (this.MaxSquare && polygon.getSquare() > this.MaxSquare)
             throw new Error("Polygon square is equal " + polygon.getSquare()
                 + " its more then max square " + this.MaxSquare);
+
         if (this.MaxPerimeter && polygon.getPerimeter() > this.MaxPerimeter)
             throw new Error("Polygon perimeter is equal " + polygon.getPerimeter()
                 + " its more then max perimeter " + this.MaxPerimeter);
+
         if (this.MaxSide && polygon.getMaxPolygonSide() > this.MaxSide)
             throw new Error("Polygon side is equal " + polygon.getMaxPolygonSide()
                 + " its more then max side " + this.MaxSide);

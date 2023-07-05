@@ -22,9 +22,10 @@ export default class Polygon {
             const Yprev: number = this.PolygonPoints[i - 1 === -1 ? length - 1 : i - 1][1];
             const Ynext: number = this.PolygonPoints[i + 1 === length ? 0 : i + 1][1];
             S += X * (Ynext - Yprev);
+            return null;
         });
         S /= 2;
-        S = S < 0 ? -S : S
+        S = S < 0 ? -S : S;
         return S;
     }
 
@@ -37,6 +38,7 @@ export default class Polygon {
             const Xnext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][0];
             const Ynext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][1];
             P += (Xnext - X)**2 + (Ynext - Y)**2;
+            return null;
         })
         return P;
     }
@@ -51,8 +53,9 @@ export default class Polygon {
             const Ynext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][1];
             const currentSide = (Xnext - X)**2 + (Ynext - Y)**2;
             maxSide = currentSide > maxSide ? currentSide : maxSide;
+            return null;
         })
-        maxSide **= (1/2)
+        maxSide **= (1/2);
         return maxSide;
     }
 }

@@ -5,8 +5,6 @@ import {Box} from "@mui/material";
 import "leaflet/dist/leaflet.css";
 import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
 import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
-import Polygon from "../Types/Polygon";
-import RulePolygon from "../Types/RulePolygon";
 
 const defaultPosition: LatLngExpression = [51.505, -0.09];
 

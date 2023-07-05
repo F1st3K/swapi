@@ -16,7 +16,7 @@ type PropsChangeMap = {
 
 type PropsLeafLet = {
     position: LatLngExpression;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 const ChangeMapView = ({position}: PropsChangeMap) => {

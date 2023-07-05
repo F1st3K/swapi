@@ -10,11 +10,16 @@ const markerIcon = L.icon({
     popupAnchor: [0, -41],
 });
 
-type PropsLeafLet = {
+type PropsChangeMap = {
     position: LatLngExpression;
 }
 
-const ChangeMapView = ({position}: PropsLeafLet) => {
+type PropsLeafLet = {
+    position: LatLngExpression;
+    children: React.ReactNode;
+}
+
+const ChangeMapView = ({position}: PropsChangeMap) => {
     const map = useMap();
 
     useEffect(() => {
@@ -24,7 +29,7 @@ const ChangeMapView = ({position}: PropsLeafLet) => {
     return null;
 }
 
-const LeafletMap = ({position}: PropsLeafLet) => {
+const LeafletMap = ({position, children}: PropsLeafLet) => {
     return (
         <>
             <MapContainer center={position} zoom={13} scrollWheelZoom={true} style={{width: '100%', height: '100%'}}>
@@ -34,6 +39,7 @@ const LeafletMap = ({position}: PropsLeafLet) => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={position} icon={markerIcon}/>
+                {children}
             </MapContainer>
         </>
     );

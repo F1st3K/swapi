@@ -1,10 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Home from "./Home";
-import {LatLngExpression} from "leaflet";
-import {Box, Button} from "@mui/material";
+import {Box, Button, Popover} from "@mui/material";
 import "leaflet/dist/leaflet.css";
-import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
-import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
 import LeafletMapWithDrawPolygons from "../components/LeafletMap/LeafletMapWithDrawPolygons";
 import LeafletMap from "../components/LeafletMap/LeafletMap";
 
@@ -12,18 +9,31 @@ import LeafletMap from "../components/LeafletMap/LeafletMap";
 
 const Maps = () => {
     const homeTabs = Home("/maps");
-    const onClick = () => {};
+    const [change, setChange] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const onError = (message: string | null) => {
+        setError(message);
+    }
+
+    const onClick = () => {
+        setChange(prevState => !prevState);
+    }
     return (
         <>
             {homeTabs}
             <Box sx={style}>
-                {/*<LeafletMapUL defaultPosition={defaultPosition} getYouLocation={useCurrentGeoPosition}/>*/}
                 <LeafletMap>
-                    <LeafletMapWithDrawPolygons initialPolygons={[{coordinates: [[0, 0], [1, 3]]}]}/>
+                    <LeafletMapWithDrawPolygons changeNext={change} onError={onError}/>
                 </LeafletMap>
-                <Button onClick={onClick}/>
-                {/*<LeafletMap/>*/}
-
+                <Button onClick={onClick}>Next</Button>
+                <Popover open={error !== null} sx={{
+                    display: 'flex',
+                    position: 'absolute' as 'absolute',
+                    top: '30%',
+                    left: '30%',
+                }} color={"error"} onClick={() => setError(null)}>
+                    {error}
+                </Popover>
             </Box>
         </>
     );

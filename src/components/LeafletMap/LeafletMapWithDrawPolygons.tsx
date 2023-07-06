@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Polygon, useMapEvents} from "react-leaflet";
 import L from 'leaflet';
-import {Button} from "@mui/material";
 import DataPolygon from "../../Types/Polygon";
 import RulePolygon from "../../Types/RulePolygon";
 
@@ -11,14 +10,15 @@ type PolygonInfo = {
 }
 
 type PropsTaskRefactorMapLeafLet = {
+    onError: (error: string) => void;
+    changeNext: boolean;
     initialPolygons?: PolygonInfo[];
     defaultColor?: string;
 }
 
-const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
+const LeafletMapWithDrawPolygons = ({changeNext, onError, initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
     const [polygons, setPolygons] = useState<PolygonInfo[]>(initialPolygons);
     const [polygonInfo, setPolygonInfo] = useState<PolygonInfo | null>(null);
-    const [error, setError] = useState<string | null>(null);
 
     const handleMapClick = (ev: L.LeafletMouseEvent) => {
         if (polygonInfo === null) return;
@@ -28,10 +28,9 @@ const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"
             setPolygonInfo(prevState => {
                 return {coordinates: p.PolygonPoints, fillColor: prevState?.fillColor}
             });
-            setError(null);
         } catch (e) {
             if (e && typeof e === 'object' && 'message' in e && typeof e.message === 'string')
-                setError(e.message);
+                onError(e.message);
         }
     }
 
@@ -44,6 +43,10 @@ const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"
         }
     }
 
+    useEffect(() => {
+        handleNextPolygon();
+    }, [changeNext])
+
     useMapEvents({ click: handleMapClick });
     return (
         <>
@@ -54,11 +57,6 @@ const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"
                 ? (<Polygon positions={polygonInfo.coordinates} color={polygonInfo.fillColor || defaultColor}/>)
                 : (<></>)
             }
-            {error
-                ? (<h1>{error}</h1>)
-                : (<></>)
-            }
-            <Button onClick={handleNextPolygon}><span>Next</span></Button>
         </>
     );
 }

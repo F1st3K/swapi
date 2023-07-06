@@ -8,6 +8,7 @@ import React, {useState} from "react";
 type PropsLeafLetUL = {
     defaultPosition: LatLngExpression;
     getYouLocation: () => GetPositionState;
+    children?: React.ReactNode;
 }
 
 type PropsGetLocation = {
@@ -24,7 +25,7 @@ const GetLocation = ({setLoading, setPosition, getPosition}:PropsGetLocation) =>
     return null;
 }
 
-const LeafletMapUL = ({defaultPosition, getYouLocation}: PropsLeafLetUL) => {
+const LeafletMapUL = ({defaultPosition, getYouLocation, children}: PropsLeafLetUL) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [position, setPosition] = useState(defaultPosition);
 
@@ -38,7 +39,9 @@ const LeafletMapUL = ({defaultPosition, getYouLocation}: PropsLeafLetUL) => {
                 ? (<GetLocation setLoading={setLoading} setPosition={setPosition} getPosition={getYouLocation}/>)
                 : (<></>)
             }
-            <LeafletMap position={position}/>
+            <LeafletMap position={position}>
+                {children}
+            </LeafletMap>
             <LoadingButton
                 size="small"
                 onClick={handleSetPosition}

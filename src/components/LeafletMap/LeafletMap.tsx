@@ -52,4 +52,4 @@ const LeafletMap = ({position, children}: PropsLeafLet) => {
     );
 }
 
-export default LeafletMap;
+export default React.memo(LeafletMap);

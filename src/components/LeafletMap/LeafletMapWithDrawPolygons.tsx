@@ -18,6 +18,7 @@ type PropsTaskRefactorMapLeafLet = {
 const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
     const [polygons, setPolygons] = useState<PolygonInfo[]>(initialPolygons);
     const [polygonInfo, setPolygonInfo] = useState<PolygonInfo | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const handleMapClick = (ev: L.LeafletMouseEvent) => {
         if (polygonInfo === null) return;
@@ -27,8 +28,10 @@ const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"
             setPolygonInfo(prevState => {
                 return {coordinates: p.PolygonPoints, fillColor: prevState?.fillColor}
             });
+            setError(null);
         } catch (e) {
-
+            if (e && typeof e === 'object' && 'message' in e && typeof e.message === 'string')
+                setError(e.message);
         }
     }
 
@@ -41,7 +44,7 @@ const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"
         }
     }
 
-    const map = useMapEvents({ click: handleMapClick });
+    useMapEvents({ click: handleMapClick });
     return (
         <>
             {polygons?.map((polygon, i) => {
@@ -49,6 +52,10 @@ const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"
             })}
             {polygonInfo
                 ? (<Polygon positions={polygonInfo.coordinates} color={polygonInfo.fillColor || defaultColor}/>)
+                : (<></>)
+            }
+            {error
+                ? (<h1>{error}</h1>)
                 : (<></>)
             }
             <Button onClick={handleNextPolygon}><span>Next</span></Button>

@@ -32,10 +32,11 @@ const ChangeMapView = ({position}: PropsChangeMap) => {
 const defaultPosition: LatLngExpression = [51.505, -0.09];
 
 const LeafletMap = ({position, children}: PropsLeafLet) => {
+    position = position || defaultPosition;
     return (
         <>
             <MapContainer center={position} zoom={13} scrollWheelZoom={true} style={{width: '100%', height: '100%'}}>
-                <ChangeMapView position={position || defaultPosition}/>
+                <ChangeMapView position={position}/>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

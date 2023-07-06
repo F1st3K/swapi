@@ -1,22 +1,29 @@
 import React from 'react';
 import Home from "./Home";
 import {LatLngExpression} from "leaflet";
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
 import "leaflet/dist/leaflet.css";
 import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
 import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
 import LeafletMapWithDrawPolygons from "../components/LeafletMap/LeafletMapWithDrawPolygons";
+import LeafletMap from "../components/LeafletMap/LeafletMap";
 
 
 
 const Maps = () => {
     const homeTabs = Home("/maps");
+    const onClick = () => {};
     return (
         <>
             {homeTabs}
             <Box sx={style}>
                 {/*<LeafletMapUL defaultPosition={defaultPosition} getYouLocation={useCurrentGeoPosition}/>*/}
-                <LeafletMapWithDrawPolygons/>
+                <LeafletMap>
+                    <LeafletMapWithDrawPolygons initialPolygons={[{coordinates: [[0, 0], [1, 3]]}]}/>
+                </LeafletMap>
+                <Button onClick={onClick}/>
+                {/*<LeafletMap/>*/}
+
             </Box>
         </>
     );

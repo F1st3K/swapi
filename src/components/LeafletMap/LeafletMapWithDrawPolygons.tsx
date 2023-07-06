@@ -1,10 +1,8 @@
-import {LatLngExpression} from "leaflet";
-import LeafletMap from "./LeafletMap";
-import React, {useEffect, useRef, useState} from "react";
-import {Polygon, useMapEvent, useMapEvents} from "react-leaflet";
-import DataPolygon from "../../Types/Polygon";
+import React, {useState} from "react";
+import {Polygon, useMapEvents} from "react-leaflet";
 import L from 'leaflet';
 import {Button} from "@mui/material";
+import DataPolygon from "../../Types/Polygon";
 import RulePolygon from "../../Types/RulePolygon";
 
 type PolygonInfo = {
@@ -20,13 +18,14 @@ type PropsTaskRefactorMapLeafLet = {
 const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
     const [polygons, setPolygons] = useState<PolygonInfo[]>(initialPolygons);
     const [polygonInfo, setPolygonInfo] = useState<PolygonInfo | null>(null);
+
     const handleMapClick = (ev: L.LeafletMouseEvent) => {
-        // if (!polygonInfo) return;
+        if (polygonInfo === null) return;
         try {
+            const p = new DataPolygon([...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]],
+                new RulePolygon({maxSquare: 3}));
             setPolygonInfo(prevState => {
-                if (prevState)
-                    return {coordinates: [...prevState.coordinates, [ev.latlng.lat, ev.latlng.lng]]};
-                return {coordinates: [[ev.latlng.lat, ev.latlng.lng]]};
+                return {coordinates: p.PolygonPoints, fillColor: prevState?.fillColor}
             });
         } catch (e) {
 
@@ -34,8 +33,12 @@ const LeafletMapWithDrawPolygons = ({initialPolygons = [], defaultColor = "blue"
     }
 
     const handleNextPolygon = () => {
-        setPolygons(prevState => polygonInfo ? [...prevState, polygonInfo] : [...prevState]);
-        setPolygonInfo(null);
+        if (polygonInfo === null) {
+            setPolygonInfo({coordinates: []});
+        } else {
+            setPolygons(prevState => polygonInfo ? [...prevState, polygonInfo] : [...prevState]);
+            setPolygonInfo(null);
+        }
     }
 
     const map = useMapEvents({ click: handleMapClick });

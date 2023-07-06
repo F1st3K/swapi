@@ -7,7 +7,7 @@ import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
 import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
 import LeafletMapWithDrawPolygons from "../components/LeafletMap/LeafletMapWithDrawPolygons";
 
-const defaultPosition: LatLngExpression = [51.505, -0.09];
+
 
 const Maps = () => {
     const homeTabs = Home("/maps");
@@ -16,7 +16,7 @@ const Maps = () => {
             {homeTabs}
             <Box sx={style}>
                 {/*<LeafletMapUL defaultPosition={defaultPosition} getYouLocation={useCurrentGeoPosition}/>*/}
-                <LeafletMapWithDrawPolygons position={defaultPosition}/>
+                <LeafletMapWithDrawPolygons/>
             </Box>
         </>
     );

@@ -15,7 +15,7 @@ type PropsChangeMap = {
 }
 
 type PropsLeafLet = {
-    position: LatLngExpression;
+    position?: LatLngExpression;
     children?: React.ReactNode;
 }
 
@@ -29,16 +29,22 @@ const ChangeMapView = ({position}: PropsChangeMap) => {
     return null;
 }
 
+const defaultPosition: LatLngExpression = [51.505, -0.09];
+
 const LeafletMap = ({position, children}: PropsLeafLet) => {
     return (
         <>
             <MapContainer center={position} zoom={13} scrollWheelZoom={true} style={{width: '100%', height: '100%'}}>
-                <ChangeMapView position={position}/>
+                <ChangeMapView position={position || defaultPosition}/>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={position} icon={markerIcon}/>
+                {
+                    position ?
+                    (<Marker position={position} icon={markerIcon}/>) :
+                    (<></>)
+                }
                 {children}
             </MapContainer>
         </>

@@ -1,9 +1,11 @@
 import RulePolygon from "./RulePolygon";
 
-export default class Polygon {
-    public readonly PolygonPoints: Array<[number, number]>;
+export type Point = [number, number];
 
-    constructor(points: Array<[number, number]>, rule?: RulePolygon) {
+export default class Polygon {
+    public readonly PolygonPoints: Array<Point>;
+
+    constructor(points: Array<Point>, rule?: RulePolygon) {
         try {
             this.PolygonPoints = points;
             rule?.CheckOnRule(this);
@@ -12,6 +14,10 @@ export default class Polygon {
                 throw new Error("Error on create polygon: " + e.message);
             throw e;
         }
+    }
+
+    public addPoint(point: Point): void {
+        this.PolygonPoints.push(point);
     }
 
     public getSquare(): number {

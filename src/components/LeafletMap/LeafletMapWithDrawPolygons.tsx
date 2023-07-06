@@ -1,20 +1,33 @@
 import {LatLngExpression} from "leaflet";
 import LeafletMap from "./LeafletMap";
-import React from "react";
-import {Polygon} from "react-leaflet";
+import React, {useEffect, useRef} from "react";
+import {Polygon, useMapEvent, useMapEvents} from "react-leaflet";
+import L from 'leaflet';
 
-type PropsTaskRefactorMapLeafLet = {
-    position: LatLngExpression;
+type PolygonInfo = {
+    coordinates: [number, number][];
+    fillColor?: string;
 }
 
+type PropsTaskRefactorMapLeafLet = {
+    initialPolygons?: PolygonInfo[];
+    defaultColor?: string;
+}
 
-const LeafletMapWithDrawPolygons = ({position}: PropsTaskRefactorMapLeafLet) => {
+const LeafletMapWithDrawPolygons = ({ initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
+    const map = useMapEvents({
+        click: (event) => {
+
+        }
+    });
+
+
     return (
-        <>
-            <LeafletMap position={position}>
-                <Polygon positions={[[0, 0], [0, 1]]}/>
-            </LeafletMap>
-        </>
+        <LeafletMap>
+            {initialPolygons?.map((polygon) => {
+                return (<Polygon positions={polygon.coordinates} color={polygon.fillColor || defaultColor}/>);
+            })}
+        </LeafletMap>
     );
 }
 

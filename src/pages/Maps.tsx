@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import Home from "./Home";
 import {Box, Button, Popover} from "@mui/material";
 import "leaflet/dist/leaflet.css";
-import LeafletMapWithDrawPolygons from "../components/LeafletMap/LeafletMapWithDrawPolygons";
+import LeafletDrawPolygons from "../components/LeafletMap/LeafletDrawPolygons";
 import LeafletMap from "../components/LeafletMap/LeafletMap";
+import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
+import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
 
 
 
@@ -18,13 +20,16 @@ const Maps = () => {
     const onClick = () => {
         setChange(prevState => !prevState);
     }
+    const getCurrent = useCurrentGeoPosition;
     return (
         <>
             {homeTabs}
             <Box sx={style}>
-                <LeafletMap>
-                    <LeafletMapWithDrawPolygons changeNext={change} onError={onError}/>
-                </LeafletMap>
+                <LeafletMapUL getYouLocation={() => {
+                    return getCurrent();
+                }}>
+                    <LeafletDrawPolygons changeNext={change} onError={onError}/>
+                </LeafletMapUL>
                 <Button onClick={onClick}>Next</Button>
                 <Popover open={error !== null} sx={{
                     display: 'flex',

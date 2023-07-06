@@ -16,7 +16,7 @@ type PropsTaskRefactorMapLeafLet = {
     defaultColor?: string;
 }
 
-const LeafletMapWithDrawPolygons = ({changeNext, onError, initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
+const LeafletDrawPolygons = ({changeNext, onError, initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
     const [polygons, setPolygons] = useState<PolygonInfo[]>(initialPolygons);
     const [polygonInfo, setPolygonInfo] = useState<PolygonInfo | null>(null);
 
@@ -61,4 +61,4 @@ const LeafletMapWithDrawPolygons = ({changeNext, onError, initialPolygons = [], 
     );
 }
 
-export default LeafletMapWithDrawPolygons;
+export default LeafletDrawPolygons;

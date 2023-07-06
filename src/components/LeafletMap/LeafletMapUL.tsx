@@ -6,7 +6,6 @@ import {MyLocation} from "@mui/icons-material";
 import React, {useState} from "react";
 
 type PropsLeafLetUL = {
-    defaultPosition: LatLngExpression;
     getYouLocation: () => GetPositionState;
     children?: React.ReactNode;
 }
@@ -25,9 +24,9 @@ const GetLocation = ({setLoading, setPosition, getPosition}:PropsGetLocation) =>
     return null;
 }
 
-const LeafletMapUL = ({defaultPosition, getYouLocation, children}: PropsLeafLetUL) => {
+const LeafletMapUL = ({getYouLocation, children}: PropsLeafLetUL) => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [position, setPosition] = useState(defaultPosition);
+    const [position, setPosition] = useState<LatLngExpression>();
 
     const handleSetPosition = () => {
         setLoading(true);

@@ -43,8 +43,7 @@ export default class Polygon {
             const Ynext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][1];
             P += ((Xnext - X)**2 + (Ynext - Y)**2) ** (1/2);
             return null;
-        })
-        alert(P)
+        });
         return P;
     }
 
@@ -59,7 +58,7 @@ export default class Polygon {
             const currentSide = (Xnext - X)**2 + (Ynext - Y)**2;
             maxSide = currentSide > maxSide ? currentSide : maxSide;
             return null;
-        })
+        });
         maxSide **= (1/2);
         return maxSide;
     }

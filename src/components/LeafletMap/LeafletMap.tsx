@@ -24,7 +24,7 @@ const ChangeMapView = ({position}: PropsChangeMap) => {
 
     useEffect(() => {
         map.setView(position);
-    });
+    }, [position]);
 
     return null;
 }

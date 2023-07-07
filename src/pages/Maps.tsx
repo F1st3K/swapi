@@ -16,13 +16,11 @@ const Maps = () => {
     const [maxSquare, setMaxSquare] = useState<number | undefined>()
     const [maxPerimeter, setMaxPerimeter] = useState<number | undefined>()
     const [maxSide, setMaxSide] = useState<number | undefined>()
+    const [color, setColor] = useState<string | undefined>()
     const onError = (message: string | null) => {
         setError(message);
     }
 
-    const onClick = () => {
-        setChange(prevState => !prevState);
-    }
     const getCurrent = useCurrentGeoPosition;
     return (
         <>
@@ -33,6 +31,7 @@ const Maps = () => {
                 }}>
                     <LeafletDrawPolygons
                         initialPolygons={[{coordinates: [[0, 0], [0, 1], [1, 0], [1, 1]]}]}
+                        defaultColor={color}
                         rule={new RulePolygon({maxSquare, maxPerimeter, maxSide})}
                         changeNext={change} onError={onError}
                     />
@@ -46,8 +45,12 @@ const Maps = () => {
                 <TextField id="outlined-basic" label="Max Side" variant="standard"
                            onChange={(event) => {setMaxSide(Number(event.target.value))}}
                 />
-
-                <Button onClick={onClick}>Next</Button>
+                <TextField id="outlined-basic" label="Color" variant="standard"
+                           onChange={(event) => {setColor(event.target.value)}}
+                />
+                <Button onClick={() => setChange(prevState => !prevState)} variant={change ? "outlined" : "contained"}>
+                    Next
+                </Button>
                 <Popover open={error !== null} sx={{
                     display: 'flex',
                     position: 'absolute' as 'absolute',

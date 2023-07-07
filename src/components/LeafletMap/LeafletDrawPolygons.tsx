@@ -17,7 +17,7 @@ type PropsTaskRefactorMapLeafLet = {
     rule: RulePolygon;
 }
 
-const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], defaultColor = "blue"}: PropsTaskRefactorMapLeafLet) => {
+const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], defaultColor = ""}: PropsTaskRefactorMapLeafLet) => {
     const [polygons, setPolygons] = useState<PolygonInfo[]>(initialPolygons);
     const [polygonInfo, setPolygonInfo] = useState<PolygonInfo | null>(null);
 
@@ -37,7 +37,7 @@ const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], d
 
     const handleNextPolygon = () => {
         if (polygonInfo === null) {
-            setPolygonInfo({coordinates: []});
+            setPolygonInfo({coordinates: [], fillColor: defaultColor});
         } else {
             setPolygons(prevState => polygonInfo ? [...prevState, polygonInfo] : [...prevState]);
             setPolygonInfo(null);

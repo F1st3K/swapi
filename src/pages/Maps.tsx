@@ -49,7 +49,7 @@ const Maps = () => {
                            onChange={(event) => {setColor(event.target.value)}}
                 />
                 <Button onClick={() => setChange(prevState => !prevState)} variant={change ? "outlined" : "contained"}>
-                    Next
+                    {change ? (<>Edit polygon mode</>) : (<>Next polygon</>)}
                 </Button>
                 <Popover open={error !== null} sx={{
                     display: 'flex',

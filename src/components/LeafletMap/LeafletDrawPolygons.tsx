@@ -36,7 +36,7 @@ const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], d
     }
 
     const handleNextPolygon = (toggle: boolean) => {
-        if (!toggle) {
+        if (toggle) {
             setPolygonInfo({coordinates: [], fillColor: defaultColor});
         } else {
             setPolygons(prevState => polygonInfo ? [...prevState, polygonInfo] : [...prevState]);

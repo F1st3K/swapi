@@ -35,8 +35,8 @@ const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], d
         }
     }
 
-    const handleNextPolygon = () => {
-        if (polygonInfo === null) {
+    const handleNextPolygon = (toggle: boolean) => {
+        if (!toggle) {
             setPolygonInfo({coordinates: [], fillColor: defaultColor});
         } else {
             setPolygons(prevState => polygonInfo ? [...prevState, polygonInfo] : [...prevState]);
@@ -45,7 +45,7 @@ const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], d
     }
 
     useEffect(() => {
-        handleNextPolygon();
+        handleNextPolygon(changeNext);
     }, [changeNext])
 
     useMapEvents({ click: handleMapClick });

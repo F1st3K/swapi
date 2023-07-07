@@ -41,10 +41,10 @@ export default class Polygon {
             const Y = point[1];
             const Xnext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][0];
             const Ynext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][1];
-            P += (Xnext - X)**2 + (Ynext - Y)**2;
+            P += ((Xnext - X)**2 + (Ynext - Y)**2) ** (1/2);
             return null;
         })
-        P **= (1/2);
+        alert(P)
         return P;
     }
 

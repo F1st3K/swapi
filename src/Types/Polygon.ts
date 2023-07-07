@@ -44,6 +44,7 @@ export default class Polygon {
             P += (Xnext - X)**2 + (Ynext - Y)**2;
             return null;
         })
+        P **= (1/2);
         return P;
     }
 

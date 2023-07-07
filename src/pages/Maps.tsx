@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import Home from "./Home";
-import {Box, Button, Popover} from "@mui/material";
+import {Box, Button, Popover, TextField} from "@mui/material";
 import "leaflet/dist/leaflet.css";
 import LeafletDrawPolygons from "../components/LeafletMap/LeafletDrawPolygons";
-import LeafletMap from "../components/LeafletMap/LeafletMap";
 import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
 import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
+import RulePolygon from "../Types/RulePolygon";
 
 
 
@@ -13,6 +13,9 @@ const Maps = () => {
     const homeTabs = Home("/maps");
     const [change, setChange] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [maxSquare, setMaxSquare] = useState<number | undefined>()
+    const [maxPerimeter, setMaxPerimeter] = useState<number | undefined>()
+    const [maxSide, setMaxSide] = useState<number | undefined>()
     const onError = (message: string | null) => {
         setError(message);
     }
@@ -28,8 +31,22 @@ const Maps = () => {
                 <LeafletMapUL getYouLocation={() => {
                     return getCurrent();
                 }}>
-                    <LeafletDrawPolygons changeNext={change} onError={onError}/>
+                    <LeafletDrawPolygons
+                        initialPolygons={[{coordinates: [[0, 0], [0, 1], [1, 0], [1, 1]]}]}
+                        rule={new RulePolygon({maxSquare, maxPerimeter, maxSide})}
+                        changeNext={change} onError={onError}
+                    />
                 </LeafletMapUL>
+                <TextField id="outlined-basic" label="Max Square" variant="standard"
+                           onChange={(event) => {setMaxSquare(Number(event.target.value))}}
+                />
+                <TextField id="outlined-basic" label="Max Perimeter" variant="standard"
+                           onChange={(event) => {setMaxPerimeter(Number(event.target.value))}}
+                />
+                <TextField id="outlined-basic" label="Max Side" variant="standard"
+                           onChange={(event) => {setMaxSide(Number(event.target.value))}}
+                />
+
                 <Button onClick={onClick}>Next</Button>
                 <Popover open={error !== null} sx={{
                     display: 'flex',

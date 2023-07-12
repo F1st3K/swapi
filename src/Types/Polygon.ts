@@ -10,7 +10,6 @@ export default class Polygon {
         try {
             this.PolygonPoints = points;
             this.Rule = rule || null;
-            this.Rule?.CheckOnRule(this);
         } catch (e) {
             if (e && typeof e === 'object' && 'message' in e)
                 throw new Error("Error on create polygon: " + e.message);
@@ -55,11 +54,10 @@ export default class Polygon {
             const Y = point[1];
             const Xnext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][0];
             const Ynext = this.PolygonPoints[i + 1 === length ? 0 : i + 1][1];
-            const currentSide = (Xnext - X)**2 + (Ynext - Y)**2;
+            const currentSide = ((Xnext - X)**2 + (Ynext - Y)**2) ** (1/2);
             maxSide = currentSide > maxSide ? currentSide : maxSide;
             return null;
         });
-        maxSide **= (1/2);
         return maxSide;
     }
 }

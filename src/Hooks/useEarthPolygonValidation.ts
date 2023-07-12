@@ -34,7 +34,7 @@ function getDistance(A: LatLngPoint, B: LatLngPoint, radius: number): number {
     return 2 * Math.atan2(Math.sqrt(temp), Math.sqrt(1 - temp)) * radius;
 }
 
-function getSquare(points: LatLngPoint[], radius: number){
+function getSquare(points: LatLngPoint[], radius: number): number {
     let area = 0;
     points.map((point, i) => {
         const [currentLat, currentLng] = point;
@@ -51,7 +51,7 @@ function getSquare(points: LatLngPoint[], radius: number){
     return Math.abs(area * (radius**2 / 2))
 }
 
-function getPerimeter(points: LatLngPoint[], radius: number) {
+function getPerimeter(points: LatLngPoint[], radius: number): number {
     let perimeter = 0;
     points.map((point, i) => {
         const nextPoint = points[(i + 1) % points.length];
@@ -61,7 +61,7 @@ function getPerimeter(points: LatLngPoint[], radius: number) {
     return perimeter;
 }
 
-function getMaxSide(points: LatLngPoint[], radius: number) {
+function getMaxSide(points: LatLngPoint[], radius: number): number {
     let maxSide = 0;
     points.map((point, i) => {
         const nextPoint = points[(i + 1) % points.length];
@@ -72,9 +72,19 @@ function getMaxSide(points: LatLngPoint[], radius: number) {
     return maxSide;
 }
 
-const useEarthPolygonValidation = ({points, rules}: EarthPolygonValidationProps): void => {
+const useEarthPolygonValidation = ({points, rules = {}}: EarthPolygonValidationProps): void => {
     try {
+        if (rules.maxSquare && getSquare(points, EARTH_RADIUS) > rules.maxSquare)
+            throw new Error("Polygon square is equal " + getSquare(points, EARTH_RADIUS)
+                + " its more then max square " + rules.maxSquare);
 
+        if (rules.maxPerimeter && getPerimeter(points, EARTH_RADIUS) > rules.maxPerimeter)
+            throw new Error("Polygon perimeter is equal " + getPerimeter(points, EARTH_RADIUS)
+                + " its more then max perimeter " + rules.maxPerimeter);
+
+        if (rules.maxSide && getMaxSide(points, EARTH_RADIUS) > rules.maxSide)
+            throw new Error("Polygon side is equal " + getMaxSide(points, EARTH_RADIUS)
+                + " its more then max side " + rules.maxSide);
     }
     catch (e) {
         if (e && typeof e === 'object' && 'message' in e)

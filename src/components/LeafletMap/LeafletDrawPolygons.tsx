@@ -3,6 +3,7 @@ import {Polygon, useMapEvents} from "react-leaflet";
 import L from 'leaflet';
 import DataPolygon from "../../Types/Polygon";
 import RulePolygon from "../../Types/RulePolygon";
+import EarthPolygon from "../../Types/EarthPolygon";
 
 type PolygonInfo = {
     coordinates: [number, number][];
@@ -24,10 +25,12 @@ const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], d
     const handleMapClick = (ev: L.LeafletMouseEvent) => {
         if (polygonInfo === null) return;
         try {
-            const p = new DataPolygon([...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]],
-                rule);
+            // const p = new DataPolygon([...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]],
+            //     rule);
+            const p = new EarthPolygon([...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]]);
+            rule.CheckOnRule(p);
             setPolygonInfo(prevState => {
-                return {coordinates: p.PolygonPoints, fillColor: prevState?.fillColor}
+                return {coordinates: p.Points, fillColor: prevState?.fillColor}
             });
         } catch (e) {
             if (e && typeof e === 'object' && 'message' in e && typeof e.message === 'string')

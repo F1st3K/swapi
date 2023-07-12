@@ -1,4 +1,5 @@
 import Polygon from "./Polygon";
+import EarthPolygon from "./EarthPolygon";
 
 export type PropsRulePolygon = {
     maxSquare?: number;
@@ -17,7 +18,7 @@ export default class RulePolygon {
         this.MaxSide = maxSide || null;
     }
 
-    public CheckOnRule(polygon: Polygon): void {
+    public CheckOnRule(polygon: EarthPolygon): void {
         if (this.MaxSquare && polygon.getSquare() > this.MaxSquare)
             throw new Error("Polygon square is equal " + polygon.getSquare()
                 + " its more then max square " + this.MaxSquare);
@@ -26,8 +27,8 @@ export default class RulePolygon {
             throw new Error("Polygon perimeter is equal " + polygon.getPerimeter()
                 + " its more then max perimeter " + this.MaxPerimeter);
 
-        if (this.MaxSide && polygon.getMaxPolygonSide() > this.MaxSide)
-            throw new Error("Polygon side is equal " + polygon.getMaxPolygonSide()
+        if (this.MaxSide && polygon.getMaxSide() > this.MaxSide)
+            throw new Error("Polygon side is equal " + polygon.getMaxSide()
                 + " its more then max side " + this.MaxSide);
     }
 }

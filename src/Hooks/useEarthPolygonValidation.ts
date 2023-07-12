@@ -17,7 +17,7 @@ function getRadians(degrees: number): number {
     return (degrees * Math.PI) / 180;
 }
 
-function calculateDistance(A: LatLngPoint, B: LatLngPoint, radius: number): number {
+function getDistance(A: LatLngPoint, B: LatLngPoint, radius: number): number {
     const [latA, lngA] = A;
     const [latB, lngB] = B;
 
@@ -34,7 +34,7 @@ function calculateDistance(A: LatLngPoint, B: LatLngPoint, radius: number): numb
     return 2 * Math.atan2(Math.sqrt(temp), Math.sqrt(1 - temp)) * radius;
 }
 
-function calculateSquare(points: LatLngPoint[], radius: number){
+function getSquare(points: LatLngPoint[], radius: number){
     let area = 0;
     points.map((point, i) => {
         const [currentLat, currentLng] = point;
@@ -49,6 +49,27 @@ function calculateSquare(points: LatLngPoint[], radius: number){
         return null;
     });
     return Math.abs(area * (radius**2 / 2))
+}
+
+function getPerimeter(points: LatLngPoint[], radius: number) {
+    let perimeter = 0;
+    points.map((point, i) => {
+        const nextPoint = points[(i + 1) % points.length];
+        perimeter += getDistance(point, nextPoint, radius);
+        return null;
+    });
+    return perimeter;
+}
+
+function getMaxSide(points: LatLngPoint[], radius: number) {
+    let maxSide = 0;
+    points.map((point, i) => {
+        const nextPoint = points[(i + 1) % points.length];
+        const currentSide= getDistance(point, nextPoint, radius);
+        maxSide = currentSide > maxSide ? currentSide : maxSide;
+        return null;
+    });
+    return maxSide;
 }
 
 const useEarthPolygonValidation = ({points, rules}: EarthPolygonValidationProps): void => {

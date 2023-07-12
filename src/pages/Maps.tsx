@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import LeafletDrawPolygons from "../components/LeafletMap/LeafletDrawPolygons";
 import LeafletMapUL from "../components/LeafletMap/LeafletMapUL";
 import useCurrentGeoPosition from "../Hooks/UseCurrentGeoPosition";
-import RulePolygon from "../Types/RulePolygon";
+import {ValidationRules} from "../Hooks/useEarthPolygonValidation";
 
 
 
@@ -30,9 +30,10 @@ const Maps = () => {
                     return getCurrent();
                 }}>
                     <LeafletDrawPolygons
-                        initialPolygons={[{coordinates: [[0, 0], [0, 1], [1, 0], [1, 1]]}]}
                         defaultColor={color}
-                        rule={new RulePolygon({maxSquare, maxPerimeter, maxSide})}
+                        rules={{maxSquare: maxSquare ? maxSquare * 1000**2 : undefined,
+                                maxPerimeter: maxPerimeter ? maxPerimeter * 1000 : undefined,
+                                maxSide: maxSide ? maxSide * 1000 : undefined,} as ValidationRules}
                         changeNext={change} onError={onError}
                     />
                 </LeafletMapUL>

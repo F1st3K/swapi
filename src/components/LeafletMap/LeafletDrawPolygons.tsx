@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Polygon, useMapEvents} from "react-leaflet";
 import L from 'leaflet';
-import DataPolygon from "../../Types/Polygon";
-import RulePolygon from "../../Types/RulePolygon";
-import EarthPolygon from "../../Types/EarthPolygon";
+import useEarthPolygonValidation, {ValidationRules} from "../../Hooks/useEarthPolygonValidation";
 
 type PolygonInfo = {
     coordinates: [number, number][];
@@ -15,22 +13,21 @@ type PropsTaskRefactorMapLeafLet = {
     changeNext: boolean;
     initialPolygons?: PolygonInfo[];
     defaultColor?: string;
-    rule: RulePolygon;
+    rules?: ValidationRules;
 }
 
-const LeafletDrawPolygons = ({changeNext, onError, rule, initialPolygons = [], defaultColor = ""}: PropsTaskRefactorMapLeafLet) => {
+const LeafletDrawPolygons = ({changeNext, onError, rules, initialPolygons = [], defaultColor = ""}: PropsTaskRefactorMapLeafLet) => {
     const [polygons, setPolygons] = useState<PolygonInfo[]>(initialPolygons);
     const [polygonInfo, setPolygonInfo] = useState<PolygonInfo | null>(null);
+
+    const validate = useEarthPolygonValidation;
 
     const handleMapClick = (ev: L.LeafletMouseEvent) => {
         if (polygonInfo === null) return;
         try {
-            // const p = new DataPolygon([...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]],
-            //     rule);
-            const p = new EarthPolygon([...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]]);
-            rule.CheckOnRule(p);
+            validate({points: [...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]], rules});
             setPolygonInfo(prevState => {
-                return {coordinates: p.Points, fillColor: prevState?.fillColor}
+                return {coordinates: [...polygonInfo.coordinates, [ev.latlng.lat, ev.latlng.lng]], fillColor: prevState?.fillColor}
             });
         } catch (e) {
             if (e && typeof e === 'object' && 'message' in e && typeof e.message === 'string')

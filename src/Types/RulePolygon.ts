@@ -1,4 +1,3 @@
-import Polygon from "./Polygon";
 import EarthPolygon from "./EarthPolygon";
 
 export type PropsRulePolygon = {
